@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>EduGesti</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0b5f6b">
-<link rel="icon" type="image/png" href="icons/icon-192.png">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="application-name" content="EduGesti">
 <meta name="apple-mobile-web-app-title" content="EduGesti">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -343,6 +340,10 @@ html.lgt main .egb{border-color:#d3e3dc}
 .bdt{flex:1;min-width:0;border-collapse:collapse;table-layout:fixed;height:100%}.bdt td{border:.25mm solid #333;padding:0 1.2mm;font-size:9pt;line-height:1.15;text-align:right;vertical-align:middle;overflow:hidden;overflow-wrap:anywhere}.bdt td:nth-child(2){text-align:center}.bdt td:first-child{width:16.5mm;font-size:7.5pt;font-weight:700;white-space:nowrap;padding:0 .8mm}
 .bds{flex:none;width:22mm;border:.25mm dashed #666;border-radius:1mm;font-size:6.5pt;line-height:1.25;text-align:center;font-weight:600;padding:.8mm .5mm}
 </style>
+<style>
+.tlt th{white-space:normal;line-height:1.2;padding:0 .8mm}.tlt thead th{height:var(--th)}.tlt .tlg th{height:7mm}.tlt td.tln{text-align:right;padding:0 1.5mm}.tlt td.tlc{direction:ltr}
+.mra{margin-top:14px}.mrah{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}.mrae{color:var(--gold);margin:4px 0 8px}.mran{background:#ffffff14;border-radius:10px;padding:8px 10px;margin:8px 0;font-size:14px;line-height:1.8}.mraf{margin:10px 0 6px}.mral{display:flex;flex-direction:column;gap:6px;max-height:420px;overflow:auto}.mrai{display:flex;align-items:center;gap:8px;background:#ffffff10;border:1px solid #ffffff22;border-radius:12px;padding:7px 10px}.mrai.on{border-color:var(--gold)}.mrai input{width:22px;height:22px;min-width:0;flex:none;margin:0}.mrat{flex:1;min-width:0;line-height:1.5;overflow-wrap:anywhere}.mrat small{display:block;color:var(--mu);font-size:12.5px}.mrat span{color:var(--mu);font-weight:400}.mrai .btn.s{flex:none}@media screen{#mraPrint{display:none!important}}@media screen{#visPrint{display:none!important}}.impfl{margin:6px 0 4px;border:1px solid #7fa0a044;border-radius:10px;padding:6px 10px}.impfl>summary{cursor:pointer;font-weight:700;font-size:14px;padding:4px 0}.impfr{display:flex;align-items:center;gap:8px;padding:6px 0;border-top:1px solid #7fa0a033}.impfn{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.impfn .fn{direction:ltr;unicode-bidi:embed;font-size:13px;overflow-wrap:anywhere;align-self:flex-start}.impfn small{color:var(--mu);font-size:12.5px}.impq{border:2px solid var(--gold);border-radius:12px;padding:8px;margin-top:8px}.vrg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.vrg .vrc{padding:8px 10px;font-size:14px}@media print{body.mrapr #exov{display:none!important}}.mraa{display:flex;align-items:center;gap:8px;margin:6px 2px;font-weight:700;cursor:pointer}.mraa input{width:22px;height:22px;min-width:0;flex:none;margin:0}html.lgt main .mrai{background:#fff;border-color:#d3e3dc}html.lgt main .mran{background:#eaf2ee}html.lgt main .mrae{color:#9a7424}
+</style>
 </head>
 <body>
 <header><button id="burger" aria-label="القائمة">☰</button><h1 id="ttl"></h1></header>
@@ -379,10 +380,10 @@ function bindEnt(){const n=$('#entn'),pm=$('#pm'),draw=()=>{const o=$('#exov');o
  $('#entp').onclick=()=>{draw();doPrint()};
  $('#entd').onclick=()=>{pdfOut(draw(),'entry-slips-'+today()+'.pdf',pm)};draw()}
 function rebuild(){{const ks=Object.keys(CL),so=ks.slice().sort(clsCmp);if(so.some((k,i)=>k!==ks[i]))so.forEach(k=>{const v=CL[k];delete CL[k];CL[k]=v})}for(const c in CL)CL[c]=CL[c].filter(n=>!bad(n,c));S.length=0;db.sid=db.sid||{};const used=new Set(Object.values(db.sid)),seen={};for(const c in CL)CL[c].forEach(n=>{let k=c+'|'+n;seen[k]=(seen[k]||0)+1;if(seen[k]>1)k+='#'+seen[k];let i=db.sid[k];if(!i){i=hs(c+n);while(used.has(i))i+='_';used.add(i);db.sid[k]=i}S.push({id:i,n,c})});clsOpts=opts(Object.keys(CL).map(c=>[c,c]));stuOpts=opts(S.map(s=>[s.id,s.n+' — '+s.c]));if(!CL[sel.c])sel.c=Object.keys(CL)[0]||'';if(sel.g!='*'&&!CL[sel.g])sel.g=Object.keys(CL)[0]||'*';if(!G().find(s=>s.id==sel.s))sel.s=G()[0]?G()[0].id:''}
-const V=[['home','الرئيسية'],['tcp','توزيع الأساتذة على الأقسام'],['ttb','استعمال الزمن'],['srch','البحث وبيانات التلاميذ'],['visits','سجل زيارات الآباء'],['prn','ورقة الغياب'],['ent','ورقة الدخول'],['mvl','سجل مقابلات التلاميذ'],['mvi','بطاقة الإنصات'],['mva','المواكبة الفردية والجماعية'],['mvd','تشخيص وضعية تلميذ دراسياً'],['mvg','متابعة تلميذ(ة) متكرر الغياب'],['mvz','توثيق زيارات الأقسام'],['mvh','التلاميذ في وضعية صعبة أو المعرضون للهدر المدرسي'],['mvs','إحصاء المقابلات'],['mvr','تقرير المواكبة السنوي'],['mvp','الأنشطة الموازية'],['gsh','ورقة التنقيط'],['mrm','المحاضر'],['mri','استثمار إجمالي المراقبة'],['mrq','استثمار القسم (المراقبة)'],['mre','استثمار إجمالي الامتحان'],['mrs','استثمار القسم (الامتحان)'],['mrc','قرار مجلس القسم'],['exset','التهيئة للامتحان'],['exg','توزيع مهام مركز الامتحان'],['exp','مطبوعات الامتحان'],['exa','ورقة الحضور'],['exk','توزيع مهام مركز الامتحان'],['ext','ترقيم الطاولات'],['exl','لوائح المترشحين'],['exs','استدعاءات المترشحين'],['imp','استيراد من مسار'],['set','الإعدادات'],['lcl','لوائح حسب القسم'],['lgen','اللوائح العامة'],['lcmp','اللوائح القديمة والجديدة'],['ltr','حركية التلاميذ'],['lreq','طلب ملف مدرسي'],['lsnd','إرسال ملف مدرسي'],['lsec','القن السري'],['ldis','لوائح توزيع القن السري'],['sed','تعديل بيانات التلميذ']];
+const V=[['home','الرئيسية'],['tcp','توزيع الأساتذة على الأقسام'],['ttb','استعمال الزمن'],['srch','البحث وبيانات التلاميذ'],['visits','سجل زيارات الآباء'],['prn','ورقة الغياب'],['ent','ورقة الدخول'],['mvl','سجل مقابلات التلاميذ'],['mvi','بطاقة الإنصات'],['mva','المواكبة الفردية والجماعية'],['mvd','تشخيص وضعية تلميذ دراسياً'],['mvg','متابعة تلميذ(ة) متكرر الغياب'],['mvz','توثيق زيارات الأقسام'],['mvh','التلاميذ في وضعية صعبة أو المعرضون للهدر المدرسي'],['mvs','إحصاء المقابلات'],['mvr','تقرير المواكبة السنوي'],['mvp','الأنشطة الموازية'],['gsh','ورقة التنقيط'],['mrm','المحاضر'],['mri','استثمار إجمالي المراقبة'],['mrq','استثمار القسم (المراقبة)'],['mre','استثمار إجمالي الامتحان'],['mrs','استثمار القسم (الامتحان)'],['mrc','قرار مجلس القسم'],['exset','التهيئة للامتحان'],['exg','توزيع مهام مركز الامتحان'],['exp','مطبوعات الامتحان'],['exa','ورقة الحضور'],['exk','توزيع مهام مركز الامتحان'],['ext','ترقيم الطاولات'],['exl','لوائح المترشحين'],['exs','استدعاءات المترشحين'],['imp','استيراد من مسار'],['set','الإعدادات'],['lcl','لوائح حسب القسم'],['lgen','اللوائح العامة'],['lcmp','اللوائح القديمة والجديدة'],['ltr','حركية التلاميذ'],['lreq','طلب ملف مدرسي'],['lsnd','إرسال ملف مدرسي'],['lsec','القن السري'],['ldis','لوائح توزيع القن السري'],['sed','تعديل بيانات التلميذ'],['tls','لوائح الدعم (TaRL)'],['tab','ورقة الغياب (TaRL)']];
 let cur='home',sel={g:'*',c:'1 أ',d:today(),s:1,marks:{},w:today(),h:1};
 const dr=$('#dr');
-const MENU=[['home'],['srch'],['g2','لوائح التلاميذ',['lcl','lgen','lsec','ltr','lreq','lsnd','lcmp']],['g','الغياب',['prn','ent','visits']],['g6','التنظيم التربوي',['tcp','ttb']],['g4','المواكبة التربوية',['mvl','mvi','mva','mvd','mvg','mvz','mvh','mvp','mvs','mvr']],['g5','استثمار النتائج',['gsh','mrm','mri','mrq','mre','mrs','mrc']],['g3','تدبير الامتحانات',['exset','exg','exp']],['imp'],['set']];
+const MENU=[['home'],['srch'],['g2','لوائح التلاميذ',['lcl','lgen','tls','lsec','ltr','lreq','lsnd','lcmp']],['g','الغياب',['prn','tab','ent','visits']],['g6','التنظيم التربوي',['tcp','ttb']],['g4','المواكبة التربوية',['mvl','mvi','mva','mvd','mvg','mvz','mvh','mvp','mvs','mvr']],['g5','استثمار النتائج',['gsh','mrm','mri','mrq','mre','mrs','mrc']],['g3','تدبير الامتحانات',['exset','exg','exp']],['imp'],['set']];
 const lab=k=>V.find(v=>v[0]==k)[1];
 const IC={g6:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h2M14 14h2M8 18h2"/>',tcp:'<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M17 7h4M17 11h4M17 15h4"/>',g5:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',g4:'<path d="M12 20s-7-4.4-8.5-9A4.6 4.6 0 0112 7.5 4.6 4.6 0 0120.5 11C19 15.6 12 20 12 20z"/>',g3:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 11h6M9 15h4"/>',g2:'<path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/>',set:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9L7 7M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>',home:'<path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-6h4v6"/>',srch:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',g:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18M10 14l4 4M14 14l-4 4"/>',imp:'<path d="M12 4v11M7 11l5 5 5-5M4 20h16"/>',};
 const tile=k=>`<span class="tile"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${IC[k]}</svg></span>`;
@@ -398,15 +399,14 @@ function go(){
  $('#ttl').textContent=V.find(v=>v[0]==cur)[1];
  const m=$('#m');let h='';
  if(cur=='visits'){
-  h=`<h2>سجل زيارات الآباء</h2><div class="row"><select id="vs" aria-label="التلميذ">${stuG()}</select><input type="date" id="vd" aria-label="تاريخ الزيارة" value="${today()}"><input id="vr" aria-label="سبب الزيارة" placeholder="سبب الزيارة"></div><button class="btn" id="va">إضافة زيارة</button><div style="height:14px"></div>`+
-  (db.visits.length?db.visits.slice().reverse().map(v=>`<div class="card"><div><b>${nm(v.s)||'تلميذ غير موجود'}</b><br><small style="color:var(--mu)">${v.d} · ${v.r||'بلا سبب'}</small></div><button class="btn s" data-dv="${v.id}">حذف</button></div>`).join(''):'<div class="empty">لا توجد زيارات مسجلة.</div>');
+  h=visHTML();
  }else if(cur=='imp'){
   const sc=db.school;
   h=impPage();
  }else if(LVV.includes(cur)){
   h=lvHTML();
  }else if(cur=='lsec'){
-  {const c0=cur;cur='ldis';const d=lvHTML().replace('<h2>لوائح توزيع القن السري</h2>','<h3>طباعة لوائح توزيع القن السري</h3>');cur=c0;h='<div class="noprint">'+secHTML()+'</div><hr class="noprint" style="border:0;border-top:1px solid #ffffff33;margin:22px 0">'+gpick()+d}
+  {const c0=cur;cur='ldis';let d=lvHTML().replace('<h2>لوائح توزيع القن السري</h2>','<h3 id="sprt">طباعة لوائح توزيع القن السري</h3>').replace(/<div class="row"><input id="lq"[^>]*><\/div>/,'');const k=d.indexOf('<div class="btns">'),fl=String(sel.lq||'').trim()?`<p class="mran noprint">🔎 المعاينة مصفّاة على: «${esc(sel.lq)}». <button class="btn s" id="slqx">عرض كل البطاقات</button></p>`:'';if(k>0)d=d.slice(0,k)+gpick()+fl+d.slice(k);cur=c0;h='<div class="noprint">'+secHTML()+'</div><hr class="noprint" style="border:0;border-top:1px solid #ffffff33;margin:22px 0">'+d}
  }else if(cur=='sed'){
   h=sedHTML();
  }else if(cur=='lreq'||cur=='lsnd'){
@@ -433,14 +433,16 @@ function go(){
   h=homeHTML2();
  }else if(cur=='srch'){
   h=`<h2>البحث وبيانات التلاميذ</h2><div class="row"><input id="q" type="search" aria-label="بحث" placeholder="ابحث بالاسم أو الرمز" value="${sel.q||''}"></div><div id="det"></div><div id="res"></div>`;
+ }else if(cur=='tls'){h=tlsHTML()
+ }else if(cur=='tab'){h=tabHTML()
  }else if(cur=='prn'){
   const pr_=prange();
   h=`<div class="noprint"><h2>ورقة الغياب</h2><div class="fg"><div><label for="pf">من</label><input type="date" id="pf" value="${pr_[0]}"></div><div><label for="pt">إلى</label><input type="date" id="pt" value="${pr_[1]}"></div></div><div class="seg" style="margin:12px 0"><button class="${sel.h==1&&!sel.man?'on p':''}" id="h1">النصف الأول</button><button class="${sel.h==2&&!sel.man?'on p':''}" id="h2">النصف الثاني</button><button id="nx">الأسبوع الموالي</button></div><p class="sub">${sel.man?'التواريخ معدّلة يدوياً. اضغط على «النصف الأول» أو «النصف الثاني» لإعادتها تلقائياً.':'التواريخ تُحسب تلقائياً، ويمكنك تعديل «من» و«إلى» يدوياً عند الحاجة.'}</p><div class="btns"><button class="btn s xb" id="pr">🖨️ طباعة</button><button class="btn s xb" id="pd">⬇ PDF</button></div><p class="sub" id="pm" aria-live="polite">كل قسم يُطبع في صفحة A4 مستقلة.</p></div><div class="ovx cvp">${gcls().map(c=>`<div class="paper pg fill">${sheetHTML(c)}</div>`).join('')}</div>`;
  }
- m.innerHTML=(['imp','home','set','sed','lsec','ltr','lreq','lsnd','ent','exset','exg','exp','exa','exk','ext','exl','exs','mvl','mvi','mva','mvd','mvg','mvz','mvh','mvp','mvs','mvr','tcp','ttb','gsh','mrm','mri','mrq','mre','mrs','mrc'].includes(cur)?'':gpick())+h;const lvs_=$('#lv');if(lvs_){lvs_.value=sel.lv||'';lvs_.onchange=()=>{sel.lv=lvs_.value;if(sel.g!='*'&&sel.lv&&lvOf(sel.g)!=sel.lv)sel.g='*';sel.marks={};go()}}const gc=$('#gc');if(gc){gc.value=sel.g;gc.onchange=()=>{sel.g=gc.value;sel.marks={};go()}}
+ m.innerHTML=(['imp','home','set','sed','lsec','ltr','lreq','lsnd','ent','exset','exg','exp','exa','exk','ext','exl','exs','mvl','mvi','mva','mvd','mvg','mvz','mvh','mvp','mvs','mvr','tcp','ttb','gsh','mrm','mri','mrq','mre','mrs','mrc','tls','tab'].includes(cur)?'':gpick())+h;const lvs_=$('#lv');if(lvs_){lvs_.value=sel.lv||'';lvs_.onchange=()=>{sel.lv=lvs_.value;if(sel.g!='*'&&sel.lv&&lvOf(sel.g)!=sel.lv)sel.g='*';sel.marks={};go()}}const gc=$('#gc');if(gc){gc.value=sel.g;gc.onchange=()=>{sel.g=gc.value;sel.marks={};go()}}
  const c=$('#c');if(c){c.value=sel.c;c.onchange=()=>{sel.c=c.value;sel.marks={};go()}}
  const d=$('#d');if(d)d.onchange=()=>{sel.d=d.value;sel.marks={};go()};
-  if(cur=='ent')bindEnt();if(cur=='lreq'||cur=='lsnd')bindMail();if(cur=='mvl')bindMv();if(cur=='mvi')bindMvi();if(cur=='mva')bindMva();if(cur=='mvd')bindMd();if(cur=='mvg')bindMg();if(cur=='mvz')bindMz();if(cur=='mvh')bindMh();if(cur=='mvp')bindAp();if(cur=='mvs')bindMvs();if(cur=='mvr')bindMvr();if(cur=='tcp')bindTcp();if(cur=='ttb')bindTtb();if(cur=='gsh')bindGsh();if(cur=='mrm')bindMrm();if(cur=='mri')bindMrx('cc',false);if(cur=='mrq')bindMrx('cc',true);if(cur=='mre')bindMrx('ex',false);if(cur=='mrs')bindMrx('ex',true);if(cur=='imp')bindMrSect();if(cur=='mrc')bindMrc();if(cur=='exk')bindEk();if(EXV.includes(cur))bindEx();if(cur=='imp'){bindImp();bindImpMore()}if(cur=='prn')bindPrn();if(cur=='srch')bindSrch();if(cur=='card'&&$('#pr')){$('#pr').onclick=doPrint;$('#pd').onclick=toPDF}if(LVV.includes(cur))bindLV();if(cur=='lsec'){bindSec();cur='ldis';bindLV();cur='lsec'}if(cur=='sed')bindSed();if(cur=='set')bindSet();
+  if(cur=='ent')bindEnt();if(cur=='lreq'||cur=='lsnd')bindMail();if(cur=='mvl')bindMv();if(cur=='mvi')bindMvi();if(cur=='mva')bindMva();if(cur=='mvd')bindMd();if(cur=='mvg')bindMg();if(cur=='mvz')bindMz();if(cur=='mvh')bindMh();if(cur=='mvp')bindAp();if(cur=='mvs')bindMvs();if(cur=='mvr')bindMvr();if(cur=='tcp')bindTcp();if(cur=='ttb')bindTtb();if(cur=='gsh')bindGsh();if(cur=='mrm')bindMrm();if(cur=='mri')bindMrx('cc',false);if(cur=='mrq')bindMrx('cc',true);if(cur=='mre')bindMrx('ex',false);if(cur=='mrs')bindMrx('ex',true);if(cur=='imp')bindMrSect();if(cur=='mrc')bindMrc();if(cur=='exk')bindEk();if(EXV.includes(cur))bindEx();if(cur=='imp'){bindImp();bindImpMore()}if(cur=='visits')bindVis();if(cur=='prn')bindPrn();if(cur=='tls')bindTls();if(cur=='tab')bindTab();if(cur=='imp')bindTrImp();if(cur=='srch')bindSrch();if(cur=='card'&&$('#pr')){$('#pr').onclick=doPrint;$('#pd').onclick=toPDF}if(LVV.includes(cur))bindLV();if(cur=='lsec'){bindSec();cur='ldis';bindLV();cur='lsec'}if(cur=='sed')bindSed();if(cur=='set')bindSet();
  fitPrev();
 }
 $('#m').onclick=e=>{
@@ -862,7 +864,7 @@ function lvHTML(){
   if(tb=='d'&&!hasOrig())x+='<p class="sub">لإظهار «القسم الأصلي» للمغادرين استورد «لائحة بداية السنة» من <button class="btn s" id="ogo" style="width:auto;display:inline-block">استيراد من مسار</button></p>';
   x+=`<div class="seg" role="tablist" style="margin:8px 0 12px"><button class="t${tb=='a'?' on':''}" role="tab" aria-selected="${tb=='a'}" data-lt="a">الوافدون (${nI})</button><button class="t${tb=='d'?' on':''}" role="tab" aria-selected="${tb=='d'}" data-lt="d">المغادرون (${nO})</button><button class="t${tb=='s'?' on':''}" role="tab" aria-selected="${tb=='s'}" data-lt="s">الإحصاء</button></div>`}
  if(cur=='lgen')x+='<p class="sub">لائحة موحدة لجميع التلاميذ. اضغط على تلميذ لتعديل بياناته، ومنها بيانات ولي الأمر.</p>'+revBar();
- if(cur=='ldis')x+='<p class="sub">لائحة لتوزيع القن السري على التلاميذ حسب الأقسام. 10 بطاقات في كل صفحة A4 للقص، ولكل قسم صفحاته. اختر «جميع الأقسام» أو قسماً محدداً من القائمة أعلاه. تتطلب إظهار القن السري أولاً.</p>'+revBar();
+ if(cur=='ldis')x+='<p class="sub">لائحة لتوزيع القن السري على التلاميذ حسب الأقسام. 10 بطاقات في كل صفحة A4 للقص، ولكل قسم صفحاته. اختر المستوى والقسم، أو «جميع الأقسام».</p>'+revBar();
  if(cur=='lcmp')x+='<p class="sub">قارن لائحة سنة سابقة بالحالية اعتماداً على رمز مسار. عند اختيار السنة الماضية تُحسب الحالات حسب المستوى (مستمر، معيد، وافد).</p>'+cmpCtl();
  x+=`${cur=='ltr'&&ltTab()=='s'?'':`<div class="row"><input id="lq" type="search" placeholder="بحث بالاسم أو الرمز" value="${esc(sel.lq||'')}" aria-label="بحث"></div>`}<div class="btns"><button class="btn s xb" id="pr">🖨️ طباعة</button><button class="btn s xb" id="px" style="display:none">⬇ Excel</button><button class="btn s xb" id="pd">⬇ PDF</button></div><p class="sub" id="pm" aria-live="polite"></p><p class="sub" id="lc"></p>${cur=='lcmp'?cmpArch():''}</div><div class="noprint" id="stdash"></div><div class="ovx${cur=='lcl'||cur=='lgen'||cur=='lcmp'||cur=='ldis'?' cvp':''}" id="lp"></div>`;
  return x}
@@ -1028,14 +1030,17 @@ function bindMail(){
  drawAll()}
 function secHTML(){
  const N=S.length,have=S.filter(x=>secOf(x)).length,nocode=S.filter(x=>!sx(x).k).length;
- return `<h2>القن السري</h2><h3>استيراد وتدبير القن السري</h3><p class="sub">يُستورد القن السري من صفحة «استيراد من مسار»، ويتم الربط بالتلاميذ عبر <b>رمز مسار</b>.</p><div class="btns"><button class="btn s xb" id="sgo">⇄ الانتقال إلى «استيراد من مسار»</button></div><div class="stats stsm" style="grid-template-columns:1fr 1fr"><div class="stat"><b>${have}</b><span>لديهم قن سري</span></div><div class="stat"><b>${N-have}</b><span>بدون قن سري</span></div></div>${nocode?`<p class="sub">⚠ ${nocode} تلميذ بلا رمز مسار، ولا يمكن ربطه.</p>`:''}<h3>البحث عن القن السري لتلميذ</h3><div class="row"><input id="sq" type="search" placeholder="اكتب اسم التلميذ أو رمز مسار" aria-label="بحث عن القن السري"></div><div id="sres" aria-live="polite"></div><h3>حذف القن السري المحفوظ</h3><button class="btn s" id="sclr">حذف كل القن السري المحفوظ</button>`}
+ const imp=Object.keys(db.sec||{}).length>0;
+ return `<h2>القن السري</h2>${imp?'':`<div class="card mvf" style="display:block"><p class="sub" style="margin:0 0 8px">لم يُستورد القن السري بعد. يُستورد من صفحة «استيراد من مسار»، ويتم الربط بالتلاميذ عبر <b>رمز مسار</b>.</p><div class="btns"><button class="btn s xb" id="sgo">⇄ الانتقال إلى «استيراد من مسار»</button></div></div>`}<div class="stats stsm" style="grid-template-columns:1fr 1fr"><div class="stat"><b>${have}</b><span>لديهم قن سري</span></div><div class="stat"><b>${N-have}</b><span>بدون قن سري</span></div></div>${nocode?`<p class="sub">⚠ ${nocode} تلميذ بلا رمز مسار، ولا يمكن ربطه.</p>`:''}${imp?'<div class="btns" style="margin:8px 0 0"><button class="btn s" id="sclr">🗑️ حذف كل القن السري المحفوظ</button></div>':''}<h3>البحث عن القن السري لتلميذ</h3><div class="row"><input id="sq" type="search" placeholder="اكتب اسم التلميذ أو رمز مسار" aria-label="بحث عن القن السري"></div><div id="sres" aria-live="polite"></div>`}
 function secRes(q){const o=document.querySelector('#sres');if(!o)return;if(!q.trim()){o.innerHTML='<p class="sub">ابحث بالاسم أو برمز مسار فيظهر القن السري لكل تلميذ على حدة.</p>';return}
  const L=S.filter(x=>mt(x,q)),sh=L.slice(0,12);
- o.innerHTML=(sh.map(x=>{const s=secOf(x);return `<div class="card secr"><div><b>${esc(x.n)}</b><br><small style="color:var(--mu)">${esc(x.c)}${sx(x).k?' · '+esc(sx(x).k):''}</small></div><div class="secv${s?'':' no'}" dir="ltr">${s?esc(s):'لا يوجد'}</div></div>`}).join('')||'<div class="empty">لا يوجد تلميذ بهذا الاسم.</div>')+(L.length>12?`<p class="sub">يوجد ${L.length-12} نتيجة أخرى، دقّق البحث.</p>`:'')}
+ o.innerHTML=(sh.map(x=>{const s=secOf(x);return `<div class="card secr"><div><b>${esc(x.n)}</b><br><small style="color:var(--mu)">${esc(x.c)}${sx(x).k?' · '+esc(sx(x).k):''}</small></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px"><div class="secv${s?'':' no'}" dir="ltr">${s?esc(s):'لا يوجد'}</div>${s?`<button class="btn s" data-sp="${esc(x.id)}">🖨️ طباعة بطاقته</button>`:''}</div></div>`}).join('')||'<div class="empty">لا يوجد تلميذ بهذا الاسم.</div>')+(L.length>12?`<p class="sub">يوجد ${L.length-12} نتيجة أخرى، دقّق البحث.</p>`:'');
+ o.querySelectorAll('[data-sp]').forEach(b=>b.onclick=()=>{const x=S.find(z=>String(z.id)===b.dataset.sp);if(!x)return;sel.lq=sx(x).k||x.n;sel.lv=lvOf(x.c);sel.g=x.c;go();const h=$('#sprt');if(h)try{h.scrollIntoView({block:'start'})}catch(e){}})}
 function bindSec(){
- $('#sgo').onclick=()=>{cur='imp';go();window.scrollTo(0,0)};
+ const sg=$('#sgo');if(sg)sg.onclick=()=>{cur='imp';go();window.scrollTo(0,0)};
  const q=$('#sq');q.oninput=()=>secRes(q.value);secRes('');
- $('#sclr').onclick=function(){twoTap(this,()=>{db.sec={};save();go()})}}
+ const sc=$('#sclr');if(sc)sc.onclick=function(){twoTap(this,()=>{db.sec={};save();go()})};
+ const lx=$('#slqx');if(lx)lx.onclick=()=>{sel.lq='';go();const h=$('#sprt');if(h)try{h.scrollIntoView({block:'start'})}catch(e){}}}
 function sedHTML(){
  const st=S.find(x=>x.id==sel.se);if(!st)return '<div class="empty">التلميذ غير موجود.</div>';
  const f=sx(st),fl=(k,l,v,t)=>`<div><label for="e_${k}">${l}</label><input id="e_${k}" data-e="${k}" ${t||''} value="${esc(v||'')}"></div>`;
@@ -1676,7 +1681,7 @@ function mvList(){const x=MVX(),L=mvFiltered(),box=$('#mvl');if(!box)return;
  box.innerHTML=`<p class="okb" style="margin:8px 0">${L.length} مقابلة${x.itv.length!==L.length?' من أصل '+x.itv.length:''} · محدد للطبع: ${x.itv.filter(r=>r.pr).length}</p>`+(L.length?L.map(card).join(''):'<p class="empty">لا توجد مقابلات مسجلة بعد.</p>')+
  `<div class="row" style="margin-top:10px"><button class="btn s" id="mva">تحديد الظاهر للطبع</button><button class="btn s" id="mvn">إلغاء التحديد</button></div><div class="btns" style="margin-top:10px"><button class="btn s xb" id="mvp">🖨️ طباعة السجل</button><button class="btn s xb" id="mvd">⬇ PDF</button><button class="btn s xb" id="mvx" style="display:none">⬇ Excel</button></div><p class="sub">يُطبع المحدد بخانة الاختيار، وإن لم تحدد شيئاً يُطبع كل ما يظهر في القائمة.</p>`;
  const pick=()=>{const s=L.filter(r=>r.pr);return s.length?s:L};
- const pgs=rows=>tblPages('سجل مقابلات التلاميذ',[['ر.ت','9mm'],['التاريخ','20mm'],['التلميذ(ة)','30mm'],['القسم','18mm'],['مع','20mm'],['الموضوع','24mm'],['ملخص المقابلة',''],['القرار / المتابعة','']],rows.map((r,i)=>[i+1,mvDt(r.d)+(r.t?' '+r.t:''),r.n,r.c,r.w,r.r,r.s,(r.dc||'')+(r.fd?(r.dc?' — ':'')+'متابعة: '+mvDt(r.fd):'')]),{cn:'',per:8,fm:11}).replace(/<table class="sh"/g,'<table class="sh mvt"').split(/(?=<div class="paper pg)/).filter(s=>s.trim());
+ const pgs=rows=>tblPages('سجل مقابلات التلاميذ',[['ر.ت','9mm'],['التاريخ','20mm'],['التلميذ(ة)','30mm'],['القسم','18mm'],['مع','20mm'],['الموضوع','24mm'],['ملخص المقابلة',''],['القرار / المتابعة','']],rows.map((r,i)=>[i+1,mvDt(r.d)+(r.t?' '+r.t:''),r.n,r.c,r.w,r.r,r.s,(r.pf?'متابعة لمقابلة '+((x.itv.find(q=>q.id===r.pf)||{}).d?mvDt(x.itv.find(q=>q.id===r.pf).d):'سابقة')+(r.dc||r.fd?' — ':''):'')+(r.dc||'')+(r.fd?(r.dc?' — ':'')+'متابعة: '+mvDt(r.fd):'')]),{cn:'',per:8,fm:11}).replace(/<table class="sh"/g,'<table class="sh mvt"').split(/(?=<div class="paper pg)/).filter(s=>s.trim());
  box.querySelectorAll('[data-mp]').forEach(c=>c.onchange=()=>{const r=x.itv.find(q=>q.id==c.dataset.mp);if(r){r.pr=c.checked;save();const o=box.querySelector('.okb');if(o)o.textContent=o.textContent.replace(/محدد للطبع: \d+/,'محدد للطبع: '+x.itv.filter(q=>q.pr).length)}});
  box.querySelectorAll('[data-me]').forEach(b=>b.onclick=()=>{mvEd=+b.dataset.me;go();window.scrollTo(0,0)});
  box.querySelectorAll('[data-md]').forEach(b=>b.onclick=function(){twoTap(this,()=>{x.itv=x.itv.filter(q=>q.id!=b.dataset.md);if(mvEd==b.dataset.md)mvEd=null;save();go()})});
@@ -1818,7 +1823,7 @@ function mdSheet(d){const m=d.m,g=(i,j)=>m[i+'_'+j]; const mk=(i,j,v)=>`<td clas
  <div class="mdl"><span>اسم التلميذ(ة): ${mdF(d.n,70)}</span><span>المستوى : ${mdF(lv,40)}</span><span>القسم / ر.ت : ${mdF(d.c?d.c+(d.no?' / '+d.no:''):'',40)}</span></div>
  <table class="mdt mds"><thead><tr><th rowspan="2" style="width:18%">المادة</th>${MD_CR.map(c=>`<th colspan="2">${c}</th>`).join('')}<th rowspan="2" style="width:9%">التوقيع</th><th rowspan="2" style="width:14%">ملاحظات الاستاذ</th></tr><tr>${MD_CR.map(()=>'<th class="mdsb">جيد</th><th class="mdsb">مقصر</th>').join('')}</tr></thead><tbody>${MD_SB.map((s,i)=>`<tr><td class="mdn">${s}</td>${MD_CR.map((c,j)=>mk(i,j,'g')+mk(i,j,'b')).join('')}<td></td><td></td></tr>`).join('')}</tbody></table>
  <table class="mdt mdm"><thead><tr><th rowspan="2" style="width:14%">معدل السنة الدراسية السابقة</th><th rowspan="2" style="width:12%">عدد ساعات الغياب</th><th colspan="2">التكرار</th><th colspan="2">معدل المواد الأدبية</th><th colspan="2">معدل المواد العلمية</th><th rowspan="2">ملاحظات</th></tr><tr><th class="mdsb">لا</th><th class="mdsb">نعم</th><th class="mdsb">الأسدس الأول</th><th class="mdsb">الأسدس الثاني</th><th class="mdsb">الأسدس الأول</th><th class="mdsb">الأسدس الثاني</th></tr></thead><tbody><tr class="mdr"><td>${esc(d.prev||'')}</td><td>${esc(d.hrs||'')}</td><td class="mdk">${d.rep==='n'?'✓':''}</td><td class="mdk">${d.rep==='y'?'✓':''}</td><td>${esc(d.a1||'')}</td><td>${esc(d.a2||'')}</td><td>${esc(d.s1||'')}</td><td>${esc(d.s2||'')}</td><td class="mdnt">${esc(d.nt||'')}</td></tr></tbody></table>
- ${mdFollow(d,0)}${mdFollow(d,1)}<div class="mdft">${esc(edrV(d))}: ${mdF(d.edu,60)}</div></div>`}
+ ${mdFollow(d,0)}${mdFollow(d,1)}<div class="mdft" style="text-align:center">${esc(edrV(d))}: ${mdF(d.edu,60)}</div></div>`}
 function mdForm(){const d=MDX(),cl=Object.keys(CL).filter(c=>CL[c].length).sort(cmpCls),lvl=[...new Set(cl.map(lvOf))].sort((a,b)=>LVO(a)-LVO(b)),names=d.c&&CL[d.c]?CL[d.c]:[];
  const tf=(k,l,t)=>`<div><label for="d_${k}">${l}</label><input id="d_${k}" data-dv="${k}"${t?` type="${t}"`:''} value="${esc(d[k]||'')}"></div>`;
  const sl=(i,j)=>`<select data-dm="${i}_${j}" aria-label="${MD_SB[i]} - ${MD_CR[j]}"><option value=""></option><option value="g"${d.m[i+'_'+j]=='g'?' selected':''}>جيد</option><option value="b"${d.m[i+'_'+j]=='b'?' selected':''}>مقصر</option></select>`;
@@ -2223,9 +2228,10 @@ function impPage(){
  impCard('org','لائحة بداية السنة (الأصلية)','لائحة التلاميذ كما كانت في بداية السنة قبل أي حركة (من مسار، Excel أو CSV، ويمكن اختيار عدة ملفات). تُحفظ منفصلة ولا تدخل في اللوائح الحالية ولا في المقارنة، وتُستعمل لمعرفة القسم الأصلي للمغادرين في «حركية التلاميذ». تُربط بالرمز، ويُستبدل ما سبق عند إعادة الاستيراد.',origCtl(),'m7')+
  impCard('sec','القن السري','ملف «InfoEleve» المستخرج من مسار (قسم واحد في كل ملف، ويمكن اختيار عدة ملفات). يُربط بالتلاميذ عبر رمز مسار.',impFile('sf2','اختيار الملفات','ملفات القن السري',1),'m2')+
  impCard('tut','معطيات أولياء الأمور','ملف «Tuteur» المستخرج من مسار (قسم واحد في كل ملف). يملأ اسم ورقم هاتف ولي الأمر: اسم الولي ثم حسب نوع الوصاية (أب أو أم). يجب استيراد لائحة القسم أولاً.',impFile('tf','اختيار الملفات','ملفات أولياء الأمور',1),'m3')+
- impCard('trf','لوائح التحويلات','ملفات «لائحة التحويلات» المستخرجة من مسار: الانتقال الإشهادي (القادمون من السادس ابتدائي)، والوافدون (التحويل الفردي)، والمغادرون. يُميَّز نوع كل ملف تلقائياً، ويمكن اختيار عدة ملفات معاً. المغادرون لا يُضافون إلى اللوائح، وتظهر معلوماتهم عند البحث. تجد اللوائح المستوردة في «حركية التلاميذ».',impFile('t1','الانتقال الإشهادي','ملفات الانتقال الإشهادي',1)+impFile('t2','الوافدون (التحويل الفردي)','ملفات الوافدين',1)+impFile('t3','المغادرون','ملفات المغادرين',1),'m4')+
+ impCard('trf','لوائح التحويلات','ملفات «لائحة التحويلات» المستخرجة من مسار: الانتقال الإشهادي (القادمون من السادس ابتدائي)، والوافدون (التحويل الفردي)، والمغادرون. يُميَّز نوع كل ملف تلقائياً، ويمكن اختيار عدة ملفات معاً. المغادرون لا يُضافون إلى اللوائح، وتظهر معلوماتهم عند البحث. تجد اللوائح المستوردة في «حركية التلاميذ».',impFile('t1','الانتقال الإشهادي','ملفات الانتقال الإشهادي',1)+impFile('t2','الوافدون','ملفات الوافدين',1)+impFile('t3','المغادرون','ملفات المغادرين',1),'m4')+
  impCard('stt','البنية التربوية','ملف «لوحة إحصاء التمدرس» (StatistiquesScolarite) المستخرج من مسار. يملأ جدول «البنية التربوية» في الرئيسية، ويُستبدل عند إعادة الاستيراد.',impFile('st1','اختيار الملف','ملف إحصاء التمدرس',0),'m5')+
  impCard('prv','لائحة سنة سابقة','لائحة تلاميذ سنة دراسية سابقة (Excel أو CSV) تُحفظ في الأرشيف للمقارنة مع اللائحة الحالية في «اللوائح القديمة والجديدة». اكتب السنة الدراسية ثم اختر الملفات (يمكن اختيار عدة ملفات).',`<input id="cyr" value="${(+yr().split('/')[0]-1)+'/'+(+yr().split('/')[1]-1)}" aria-label="السنة الدراسية" style="max-width:130px">`+impFile('cf2','اختيار الملفات','ملفات لائحة سنة سابقة',1),'m6')+
+ trCard()+
  mrSect()+`<details id="clsD" class="clsd"${CLSO?' open':''}><summary><b>الأقسام المستوردة (${Object.keys(CL).length})</b><small>${CLSO?'اضغط للإخفاء ▴':'اضغط للعرض ▾'}</small></summary>`+Object.keys(CL).map(c=>`<div class="card"><span>${c} · ${CL[c].length} تلميذ</span><button class="btn s" data-dc="${c}">حذف</button></div>`).join('')+`</details>`}
 /* بطاقات النقط: عدة ملفات دفعة واحدة */
 function mrnHTML(){const m=MRX();
@@ -2898,6 +2904,277 @@ function bindMvr(){const q=s=>document.querySelector(s),a=MVR(),pm=()=>q('#pm'),
  fitPrev();
  q('#rp').onclick=doPrint;q('#rd').onclick=()=>pdfOut([...document.querySelectorAll('#exov .pg')],'تقرير-المواكبة-'+today()+'.pdf',pm())}
 
+/* ===== الدعم TaRL: لوائح مجموعات الدعم وورقة غيابها (بيانات معزولة في db.tarl، لا تمس اللوائح العادية) ===== */
+var TS={lv:'',g:'*',h:1,w:'',man:false,pf:'',pt:''};
+function TRL(){let t=db.tarl;if(!t||typeof t!='object'||Array.isArray(t))t=db.tarl={g:{}};if(!t.g||typeof t.g!='object'||Array.isArray(t.g))t.g={};
+ for(const k in t.g){const o=t.g[k];if(!o||typeof o!='object'||!Array.isArray(o.st)){delete t.g[k];continue}if(!Array.isArray(o.sb))o.sb=[];if(!Array.isArray(o.gv))o.gv=[];o.st=o.st.filter(s=>s&&typeof s=='object')}return t}
+const trT=x=>String(x==null?'':x).replace(/\s+/g,' ').trim(),trN=x=>trT(x).replace(/[أإآ]/g,'ا').replace(/[ً-ْ]/g,'');
+function trLv(code,txt){const c=String(code||'').toUpperCase().replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)),m=c.match(/TARL[\s\-_]*([1-3])/)||c.match(/(?:^|[^0-9])([1-3])\s*A/);if(m)return m[1];
+ const t=trN(txt);return /الاولى|الاول/.test(t)?'1':/الثانية|الثاني/.test(t)?'2':/الثالثة|الثالث/.test(t)?'3':'?'}
+function trCmp(a,b){const A=TRL().g[a]||{},B=TRL().g[b]||{},la=A.lv=='?'?9:+A.lv||9,lb=B.lv=='?'?9:+B.lv||9;return la-lb||String(a).localeCompare(String(b),'ar',{numeric:true})}
+function trGroups(lv){return Object.keys(TRL().g).filter(k=>!lv||TRL().g[k].lv==lv).sort(trCmp)}
+function trLevels(){return [...new Set(Object.values(TRL().g).map(o=>o.lv))].sort((a,b)=>(a=='?'?9:+a)-(b=='?'?9:+b))}
+/* قراءة ملف مسار «Export_Groupe_de_Soutien»: ورقة لكل مجموعة */
+function trRead(wb){const out=[];
+ wb.SheetNames.forEach(sn=>{const R=XLSX.utils.sheet_to_json(wb.Sheets[sn],{header:1,defval:''});
+  let hi=-1;for(let i=0;i<Math.min(R.length,60)&&hi<0;i++){const H=(R[i]||[]).map(trN);if(H.some(x=>/^الاسم الكامل$|^اللقب والاسم$/.test(x))&&H.some(x=>/^رقم التلميذ$|^الرمز$|^رمز مسار$|^رمز التلميذ$/.test(x)))hi=i}
+  if(hi<0)return;
+  const H=R[hi].map(trN),f=re=>H.findIndex(x=>re.test(x)),ik=f(/^رقم التلميذ$|^الرمز$|^رمز مسار$|^رمز التلميذ$/),inm=f(/^الاسم الكامل$|^اللقب والاسم$/),ix=f(/^النوع$|^الجنس$/);
+  const sc=[];H.forEach((x,j)=>{if(x&&j!==ik&&j!==inm&&j!==ix&&!/^(ر\.?ت|الرقم الترتيبي|القسم|القسم الاصلي)$/.test(x))sc.push(j)});
+  let gc='',lvt='',yr='',gv=sc.map(()=>'');
+  for(let i=0;i<hi;i++){const r=R[i]||[];r.forEach((x,j)=>{const t=trN(x),nx=()=>{for(let q=j+1;q<r.length;q++){const v=trT(r[q]);if(v)return v}return ''};
+    if(/^المجموعة$/.test(t)&&!gc)gc=nx();else if(/^المستوى$/.test(t)&&!lvt)lvt=nx();else if(/^السنة الدراسية$/.test(t)&&!yr)yr=nx()});
+   if(sc.length&&i+1<hi&&sc.every(j=>trN(r[j])===H[j])){const nr=R[i+1]||[];gv=sc.map(j=>trT(nr[j]))}}
+  gc=gc||trT(sn);
+  const st=[];R.slice(hi+1).forEach(r=>{const n=trT(r[inm]),k=ik>=0?trT(r[ik]).toUpperCase():'';if(!n)return;if(n===trT(R[hi][inm]))return;st.push({k,n,x:ix>=0?trT(r[ix]):'',v:sc.map(j=>trT(r[j]))})});
+  if(!st.length)return;
+  out.push({c:gc,lv:trLv(gc,lvt),lvt,yr,sb:sc.map(j=>trT(R[hi][j])),gv,st})});
+ return out}
+async function trImport(fs){let L=[];for(const f of fs)L=L.concat(trRead(await rdWb(f)));
+ if(!L.length)return 'لم أجد مجموعات دعم في الملف. يجب أن يحوي عمودي «رقم التلميذ» و«الإسم الكامل» (ملف «مجموعات الدعم» المستخرج من مسار).';
+ const T=TRL(),NL=new Set(L.map(o=>o.lv)),old=Object.keys(T.g).filter(k=>NL.has(T.g[k].lv));old.forEach(k=>delete T.g[k]);
+ L.forEach(o=>{T.g[o.c]={lv:o.lv,lvt:o.lvt,yr:o.yr,sb:o.sb,gv:o.gv,st:o.st}});T.t=Date.now();T.f=fs.length==1?fs[0].name:fs.length+' ملفات';save();
+ const ns=L.reduce((a,o)=>a+o.st.length,0),lvn=[...NL].map(l=>l=='?'?'مستوى غير محدد':(LV[l]||l)).join('، ');
+ return 'تم استيراد '+L.length+' مجموعة و'+ns+' تلميذ ('+lvn+').'+(old.length?'\nاستُبدلت مجموعات هذا المستوى السابقة ('+old.length+').':'')+'\nالمستويات الأخرى بقيت كما هي.'}
+function trCard(){const T=TRL(),ks=Object.keys(T.g),ok=ks.length>0,ns=ks.reduce((a,k)=>a+T.g[k].st.length,0);
+ const per=trLevels().map(l=>(l=='?'?'غير محدد':(LV[l]||l))+': '+trGroups(l).length).join(' · ');
+ return `<div class="card mvf" style="display:block"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center"><b>مجموعات الدعم (TaRL)</b>${ok?'<span class="tag g">تم الاستيراد</span>':'<span class="tag a">لم يُستورد</span>'}</div>${ok?`<div class="imb ok"><b>✔ تم الاستيراد</b><span>${esc(ks.length+' مجموعة · '+ns+' تلميذ')}</span>${T.f?`<span class="fn">${esc(T.f)}</span>`:''}${T.t?`<span class="d">${fmtD(T.t)}</span>`:''}</div><p class="sub" style="margin:4px 0">${esc(per)}</p>`:''}<p class="sub" style="margin:6px 0">ملف «مجموعات الدعم» المستخرج من مسار (ورقة لكل مجموعة، ملف لكل مستوى). يُحفظ منفصلاً تماماً عن لوائح التلاميذ ولا يدخل في أي إحصاء. استيراد مستوى يستبدل مجموعات نفس المستوى فقط. تجد اللوائح في «لوائح الدعم (TaRL)» وورقة الغياب في «ورقة الغياب (TaRL)».</p><div class="btns">${impFile('trf1','اختيار الملفات','ملفات مجموعات الدعم',1)}${ok?'<button class="btn s xb" id="trdel">حذف مجموعات الدعم</button>':''}</div><p id="trm" class="sub" aria-live="polite"></p></div>`}
+function bindTrImp(){const el=$('#trf1');if(!el)return;
+ el.onchange=async e=>{const fs=[...e.target.files];if(!fs.length)return;const m=$('#trm');m.textContent='جارٍ القراءة…';let r;
+  try{r=await trImport(fs)}catch(x){r='تعذّرت قراءة الملف. جرّب حفظه بصيغة xlsx. إن استمر الخطأ تأكد من اتصال الإنترنت (لتحميل أداة Excel) وأن الملف جدول غير محمي بكلمة سر.'}
+  TS.msg=r;go()};
+ const d=$('#trdel');if(d)d.onclick=function(){twoTap(this,()=>{delete db.tarl;save();TS.msg='تم حذف مجموعات الدعم.';go()})};
+ if(TS.msg){const m=$('#trm');if(m)m.textContent=TS.msg;TS.msg=''}}
+/* اختيار المستوى ثم المجموعة */
+function trFix(){const L=trLevels();if(TS.lv&&!L.includes(TS.lv))TS.lv='';if(!TS.lv&&L.length)TS.lv=L[0];if(TS.g!='*'&&!trGroups(TS.lv).includes(TS.g))TS.g='*'}
+function trSel(){return TS.g=='*'?trGroups(TS.lv):[TS.g]}
+function trPick(){const L=trLevels();return `<div class="row noprint"><select id="trlv" aria-label="المستوى">${L.map(l=>`<option value="${l}"${l==TS.lv?' selected':''}>${l=='?'?'مستوى غير محدد':esc(LV[l]||l)}</option>`).join('')}</select><select id="trg" aria-label="المجموعة"><option value="*">جميع مجموعات ${TS.lv=='?'?'المستوى':esc(LV[TS.lv]||'')}</option>${trGroups(TS.lv).map(g=>`<option value="${esc(g)}"${g==TS.g?' selected':''}>${esc(g)}</option>`).join('')}</select></div>`}
+function bindTrPick(){const a=$('#trlv'),b=$('#trg');if(a)a.onchange=()=>{TS.lv=a.value;TS.g='*';go()};if(b)b.onchange=()=>{TS.g=b.value;go()}}
+const trEmpty=()=>`<div class="card" style="display:block"><p class="sub" style="margin:0 0 10px">لم تُستورد مجموعات الدعم بعد. استوردها من صفحة «استيراد من مسار».</p><button class="btn s" onclick="cur='imp';go()">الانتقال إلى الاستيراد</button></div>`;
+/* لوائح الدعم */
+function trOrig(){const m={};S.forEach(s=>{const k=String((INF[s.c+'|'+s.n]||{}).k||'').toUpperCase();if(k&&!m[k])m[k]=s.c});return m}
+function trHead(g,o,title){const s=db.school;return `<div class="ph"><div>${hdrR()}</div><div class="tb"><b>${title}</b></div><div class="pl"><div><b>المجموعة:</b> ${esc(g)}</div><div><b>المستوى:</b> ${esc(o.lv=='?'?(o.lvt||'—'):(LV[o.lv]||o.lvt))}</div><div><b>السنة:</b> ${esc(o.yr||yr())}</div></div></div>`}
+function trListPages(g,OM){const o=TRL().g[g],sb=o.sb,N=sb.length,per0=48,P=Math.max(1,Math.ceil(o.st.length/per0)),per=Math.max(1,Math.ceil(o.st.length/P)),out=[];
+ const lg=db.school.lg?(db.school.lh||16):0,rh=Math.min(7.5,(222-lg)/Math.max(per,20)),fs=Math.max(10,Math.min(13,rh*2.1)).toFixed(1),sw=N?Math.max(14,Math.min(26,90/N)):0;
+ const cols=`<colgroup><col style="width:9mm"><col style="width:23mm"><col><col style="width:20mm"><col style="width:11mm">${sb.map(()=>`<col style="width:${sw.toFixed(1)}mm">`).join('')}</colgroup>`;
+ const gl=N?`<tr class="tlg"><th colspan="5" class="tll">لبنة المجموعة</th>${o.gv.map(v=>`<th>${esc(v||'—')}</th>`).join('')}</tr>`:'';
+ for(let p=0;p<P;p++){const ch=o.st.slice(p*per,p*per+per);
+  out.push(`<div class="paper pg">${trHead(g,o,'لائحة مجموعة الدعم')}<table class="sh tlt" style="--rh:${rh.toFixed(2)}mm;--fs:${fs}px;--th:9mm">${cols}<thead>${gl}<tr><th>ر.ت</th><th>رقم التلميذ</th><th>الإسم الكامل</th><th>القسم الأصلي</th><th>النوع</th>${sb.map(x=>`<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>${ch.map((s,i)=>`<tr><td>${p*per+i+1}</td><td class="tlc">${esc(s.k)}</td><td class="nmc tln">${esc(s.n)}</td><td>${esc(OM[s.k]||'—')}</td><td>${esc(s.x)}</td>${sb.map((_,j)=>`<td>${esc((s.v||[])[j]||'')}</td>`).join('')}</tr>`).join('')}</tbody></table><div class="pgn">صفحة ${p+1} / ${P}</div></div>`)}
+ return out.join('')}
+function tlsHTML(){if(!Object.keys(TRL().g).length)return `<h2>لوائح الدعم (TaRL)</h2>`+trEmpty();trFix();const OM=trOrig(),G=trSel(),ns=G.reduce((a,g)=>a+TRL().g[g].st.length,0);
+ return `<div class="noprint"><h2>لوائح الدعم (TaRL)</h2>${trPick()}<p class="sub">${G.length} مجموعة · ${ns} تلميذ. «القسم الأصلي» يُؤخذ من لوائح التلاميذ برقم مسار التلميذ.</p><div class="btns"><button class="btn s xb" id="tlp">🖨️ طباعة</button><button class="btn s xb" id="tld">⬇ PDF</button></div><p class="sub" id="pm" aria-live="polite">كل مجموعة تُطبع في صفحة A4 مستقلة.</p></div><div class="ovx cvp">${G.map(g=>trListPages(g,OM)).join('')}</div>`}
+function bindTls(){bindTrPick();const p=$('#tlp');if(!p)return;p.onclick=doPrint;
+ $('#tld').onclick=()=>pdfOut([...document.querySelectorAll('.pg')],'tarl-lists-'+today()+'.pdf',$('#pm'));
+}
+/* ورقة الغياب (TaRL): نفس ورقة الغياب، مع «المجموعة» بدل «القسم» */
+function tprange(){const m=mon(TS.w||today()),o=TS.h==2?3:0,a=new Date(m);a.setDate(m.getDate()+o);const b=new Date(a);b.setDate(a.getDate()+2);const iso=t=>t.toISOString().slice(0,10);return TS.man&&TS.pf&&TS.pt?[TS.pf,TS.pt]:[iso(a),iso(b)]}
+function tabSheet(gn){
+ const r=tprange();let a=new Date(r[0]+'T12:00:00'),b=new Date(r[1]+'T12:00:00');if(b<a){const x=a;a=b;b=x}
+ const days=[];for(let d=new Date(a);d<=b&&days.length<6;d.setDate(d.getDate()+1)){if(d.getDay()!=0)days.push(new Date(d))}
+ if(!days.length)days.push(new Date(a));
+ const NM=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],DN=days.map(d=>NM[d.getDay()]),N=DN.length;
+ const L=(TRL().g[gn]||{st:[]}).st,n=Math.max(38,L.length+1);
+ const cells=f=>Array.from({length:N},()=>[0,1,2,3,4,5,6,7].map(f).join('')).join('');
+ const ttl=N>=6?'أسبوعية':'النصف أسبوعية';
+ let t=`<div class="ph"><div>${hdrR()}</div><div class="tb"><b>ورقة الغياب</b><b>${ttl}</b><small>(${N>1?DN[0]+' - '+DN[N-1]:DN[0]})</small></div><div class="pl"><div><b>المجموعة:</b> ${esc(gn)}</div><div><b>من:</b> ${fd(a)}</div><div><b>إلى:</b> ${fd(b)}</div></div></div>`;
+ t+=`<table class="sh" style="--rh:${Math.min(5.6,(203-(db.school.lg?(db.school.lh||16):0))/n).toFixed(2)}mm"><colgroup><col style="width:9mm"><col style="width:48mm">${'<col>'.repeat(8*N)}</colgroup><thead><tr><th rowspan="3">ر.ت</th><th rowspan="3">اللقب والاسم</th>${DN.map(d=>`<th colspan="8" class="de">${d}</th>`).join('')}</tr><tr>${DN.map(()=>`<th colspan="4" class="md">ص</th><th colspan="4" class="de">م</th>`).join('')}</tr><tr>${cells(i=>`<th class="${i==3?'md':i==7?'de':''}">${(i%4)+1}</th>`)}</tr></thead><tbody>`;
+ for(let i=0;i<n;i++)t+=`<tr><td>${i+1}</td><td class="nmc">${L[i]?esc(L[i].n):''}</td>${cells(j=>`<td class="${j==3?'md':j==7?'de':''}"></td>`)}</tr>`;
+ t+=`<tr class="sg"><td colspan="2" class="lb">توقيع الأستاذ(ة)</td>${cells(j=>`<td class="${j==3?'md':j==7?'de':''}"></td>`)}</tr><tr class="ad"><td colspan="2" class="lb">يُوجَّه إلى الإدارة</td>${'<td colspan="8" class="de"></td>'.repeat(N)}</tr></tbody></table>`;
+ return t}
+function tabHTML(){if(!Object.keys(TRL().g).length)return `<h2>ورقة الغياب (TaRL)</h2>`+trEmpty();trFix();if(!TS.w)TS.w=today();const pr_=tprange();
+ return `<div class="noprint"><h2>ورقة الغياب (TaRL)</h2>${trPick()}<div class="fg"><div><label for="tpf">من</label><input type="date" id="tpf" value="${pr_[0]}"></div><div><label for="tpt">إلى</label><input type="date" id="tpt" value="${pr_[1]}"></div></div><div class="seg" style="margin:12px 0"><button class="${TS.h==1&&!TS.man?'on p':''}" id="th1">النصف الأول</button><button class="${TS.h==2&&!TS.man?'on p':''}" id="th2">النصف الثاني</button><button id="tnx">الأسبوع الموالي</button></div><p class="sub">${TS.man?'التواريخ معدّلة يدوياً. اضغط على «النصف الأول» أو «النصف الثاني» لإعادتها تلقائياً.':'التواريخ تُحسب تلقائياً، ويمكنك تعديل «من» و«إلى» يدوياً عند الحاجة.'}</p><div class="btns"><button class="btn s xb" id="tpr">🖨️ طباعة</button><button class="btn s xb" id="tpd">⬇ PDF</button></div><p class="sub" id="pm" aria-live="polite">كل مجموعة تُطبع في صفحة A4 مستقلة.</p></div><div class="ovx cvp">${trSel().map(g=>`<div class="paper pg fill">${tabSheet(g)}</div>`).join('')}</div>`}
+function bindTab(){bindTrPick();const pf=$('#tpf');if(!pf)return;
+ const upd=()=>{TS.pf=$('#tpf').value;TS.pt=$('#tpt').value;if(TS.pf)TS.w=TS.pf;TS.man=!!(TS.pf&&TS.pt);go()};
+ pf.onchange=upd;$('#tpt').onchange=upd;
+ $('#th1').onclick=()=>{TS.h=1;TS.man=false;go()};$('#th2').onclick=()=>{TS.h=2;TS.man=false;go()};
+ $('#tnx').onclick=()=>{const t=mon(tprange()[0]);t.setDate(t.getDate()+7);TS.w=t.toISOString().slice(0,10);TS.h=1;TS.man=false;go()};
+ $('#tpr').onclick=doPrint;
+ $('#tpd').onclick=()=>pdfOut([...document.querySelectorAll('.pg')],'tarl-absence-sheets-'+today()+'.pdf',$('#pm'))}
+{const _wd=wipeData;wipeData=function(){delete db.tarl;return _wd.apply(this,arguments)}}
+
+/* ===== سجل البطاقات المحفوظة للمواكبة (يُضاف حول الاستمارات دون تغييرها؛ البيانات في db.mv.rec) ===== */
+const MRA={
+ mvi:{s:'ins',nm:()=>MVI(),sheet:d=>mviSheet(d),has:d=>!!d.n,who:d=>[d.n||'',d.c||''],keep:['edu','edr'],sel:'i_n'},
+ mva:{s:'acc',nm:()=>MQA(),sheet:d=>mqPages(d).join(''),has:d=>!!(d.type=='g'?(Array.isArray(d.list)&&d.list.length):d.n),who:d=>d.type=='g'?['مواكبة جماعية ('+((d.list||[]).length)+' تلميذ)',[...new Set((d.list||[]).map(x=>x&&x.c).filter(Boolean))].join('، ')]:[d.n||'',d.c||''],keep:['edu','edr','type'],sel:'q_pn'},
+ mvd:{s:'dx',nm:()=>{const d=MDX();if(d.kind==='m')MMX();return d},sheet:d=>d.kind==='m'?mmSheet(d):mdSheet(d),has:d=>!!d.n,who:d=>[d.n||'',d.c||''],keep:['edu','edr','kind'],sel:'d_n',tag:d=>d.kind==='m'?'بطاقة المتفوق':'بطاقة شاملة'},
+ mvg:{s:'ab',nm:()=>MGX(),sheet:d=>mgSheet(d),has:d=>!!d.n,who:d=>[d.n||'',d.c||''],keep:['edu','edr'],sel:'g_n'},
+ mvz:{s:'vz',nm:()=>MZX(),sheet:d=>mzSheet(d),has:d=>!!d.c,who:d=>['',d.c||''],keep:['edu','edr'],sel:'z_c',cls:1}};
+let MRF={},MRS={};
+const mraCp=o=>JSON.parse(JSON.stringify(o==null?{}:o));
+function mraL(s){const x=MVX();if(!x.rec||typeof x.rec!='object'||Array.isArray(x.rec))x.rec={};if(!Array.isArray(x.rec[s]))x.rec[s]=[];x.rec[s]=x.rec[s].filter(r=>r&&typeof r=='object'&&r.data&&typeof r.data=='object');return x.rec[s]}
+function mraSlot(s){const x=MVX();if(!x[s]||typeof x[s]!='object'||Array.isArray(x[s]))x[s]={};return x[s]}
+function mraDate(d){const v=String(d&&(d.d||d.dt)||'');return /^\d{4}-\d{2}-\d{2}$/.test(v)?v:today()}
+const mraFD=v=>{const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(v||'');return m?m[3]+'/'+m[2]+'/'+m[1]:(v||'')};
+function mraRender(K,data){const x=MVX(),s=K.s,old=x[s];x[s]=mraCp(data);delete x[s]._rid;let h='';try{h=K.sheet(K.nm())}finally{x[s]=old}return h}
+function mraMake(K,d,id){const w=K.who(d),data=mraCp(d);delete data._rid;return {id,t:Date.now(),d:mraDate(d),n:w[0],c:w[1],g:K.tag?K.tag(d):'',data}}
+/* البطاقة الموجودة حالياً في كل استمارة تُحفظ مرة واحدة كأول بطاقة في السجل */
+function mraMig(){try{const x=MVX();if(x.recMig)return;Object.values(MRA).forEach(K=>{const d=x[K.s];if(d&&typeof d=='object'&&K.has(d)&&!d._rid){const id=Date.now()+Math.floor(Math.random()*1e6);mraL(K.s).push(mraMake(K,d,id));d._rid=id}});x.recMig=1;save()}catch(e){}}
+function mraFil(k){const K=MRA[k],f=MRF[k]||(MRF[k]={lv:'',c:'',q:''}),q=nzq(f.q||'').trim();
+ return mraL(K.s).filter(r=>(!f.lv||String(r.c).split('، ').some(c=>lvOf(c)==f.lv))&&(!f.c||String(r.c).split('، ').includes(f.c))&&(!q||q.split(' ').every(w=>nzq(r.n+' '+r.c+' '+(r.data&&r.data.type=='g'?(r.data.list||[]).map(z=>z&&z.n).join(' '):'')).includes(w)))).sort((a,b)=>String(b.d).localeCompare(String(a.d))||b.t-a.t)}
+function mraPanel(k){const K=MRA[k],L=mraL(K.s),f=MRF[k]||(MRF[k]={lv:'',c:'',q:''}),sl=mraSlot(K.s),ed=sl._rid?L.find(r=>r.id===sl._rid):null,F=mraFil(k);
+ const cs=[...new Set(L.flatMap(r=>String(r.c).split('، ').filter(Boolean)))].sort(cmpCls),ls=[...new Set(cs.map(lvOf))].sort((a,b)=>LVO(a)-LVO(b));
+ return `<div class="card mvf mra" id="mraP" style="display:block"><div class="mrah"><b>🗂️ سجل البطاقات المحفوظة</b><span class="tag nt">${L.length}</span></div>
+ ${ed?`<p class="sub mrae">✏️ تعدّل الآن بطاقة محفوظة: ${esc(ed.n||ed.c)}${ed.n&&ed.c?' — '+esc(ed.c):''} · ${esc(mraFD(ed.d))}. «حفظ في السجل» يحدّثها ولا يُنشئ بطاقة جديدة.</p>`:''}
+ <div class="btns"><button class="btn s xb" id="mraS">💾 ${ed?'حفظ التعديل في السجل':'حفظ في السجل'}</button></div><p class="sub" id="mraM" aria-live="polite"></p><div id="mraN"></div>
+ ${L.length?`<div class="row mraf"><select id="mraL" aria-label="المستوى"><option value="">جميع المستويات</option>${ls.map(l=>`<option value="${l}"${l==f.lv?' selected':''}>${LV[l]||l}</option>`).join('')}</select><select id="mraC" aria-label="القسم"><option value="">جميع الأقسام</option>${cs.filter(c=>!f.lv||lvOf(c)==f.lv).map(c=>`<option${c==f.c?' selected':''}>${esc(c)}</option>`).join('')}</select><input id="mraQ" type="search" aria-label="بحث" placeholder="${K.cls?'بحث بالقسم':'بحث بالاسم'}" value="${esc(f.q||'')}"></div>
+ ${F.length?`<label class="mraa"><input type="checkbox" id="mraA"${F.every(r=>(MRS[k]||new Set()).has(r.id))?' checked':''}> تحديد الكل</label>`:''}<div class="mral">${F.length?F.map(r=>`<div class="mrai${sl._rid===r.id?' on':''}"><input type="checkbox" data-rk="${r.id}" aria-label="تحديد"${(MRS[k]||new Set()).has(r.id)?' checked':''}><div class="mrat"><b>${esc(r.n||r.c)}</b>${r.n&&r.c?` <span>— ${esc(r.c)}</span>`:''}<small>${esc(mraFD(r.d))}${r.g?' · '+esc(r.g):''}</small></div><button class="btn s xb" data-ro="${r.id}">فتح</button><button class="btn s xb" data-rd="${r.id}">حذف</button></div>`).join(''):'<p class="sub" style="margin:6px 0">لا توجد بطاقات مطابقة.</p>'}</div>
+ <div class="btns" style="margin-top:8px"><button class="btn s xb" id="mraPR">🖨️ طباعة</button><button class="btn s xb" id="mraPD">⬇ PDF</button></div><p class="sub" id="mraM2" aria-live="polite" style="margin:6px 0 0"></p>`:'<p class="sub" style="margin:6px 0">لا توجد بطاقات محفوظة بعد. املأ الاستمارة ثم اضغط «حفظ في السجل».</p>'}</div>`}
+function mraPick(k){const K=MRA[k],S=MRS[k]||new Set(),F=mraFil(k);return F.filter(r=>S.has(r.id))}
+function mraHTML(k,R){const K=MRA[k];return R.map(r=>mraRender(K,r.data)).join('')}
+function mraPrClear(){const p=document.getElementById('mraPrint');if(p)p.remove();document.body.classList.remove('mrapr')}
+function mraPrint(k){const R=mraPick(k),m=$('#mraM2');if(!R.length){if(m)m.textContent='حدّد بطاقة أو أكثر.';return}const o=$('#exov');if(!o)return;
+ mraPrClear();const d=document.createElement('div');d.id='mraPrint';d.className='ovx';d.innerHTML=mraHTML(k,R);o.insertAdjacentElement('afterend',d);document.body.classList.add('mrapr');
+ setTimeout(()=>document.addEventListener('pointerdown',mraPrClear,{once:true,capture:true}),1500);doPrint()}
+function mraPdf(k){const R=mraPick(k),m=$('#mraM2');if(!R.length){if(m)m.textContent='حدّد بطاقة أو أكثر.';return}if(!(window.html2canvas&&window.jspdf)){if(m)m.textContent='تعذّر تحميل أداة PDF. سيُفتح مربع الطباعة، اختر منه «حفظ كملف PDF».';mraPrint(k);return}const d=document.createElement('div');d.innerHTML=mraHTML(k,R);pdfOut([...d.querySelectorAll('.pg')],'بطاقات-المواكبة-'+today()+'.pdf',m)}
+function mraBind(k){const K=MRA[k],m=t=>{const e=$('#mraM');if(e)e.textContent=t};
+ $('#mraS').onclick=()=>{const sl=mraSlot(K.s);if(!K.has(sl)){m(K.cls?'اختر القسم أولاً.':'اختر التلميذ(ة) أولاً.');return}
+  const L=mraL(K.s),w=K.who(sl);let ex=sl._rid?L.find(r=>r.id===sl._rid):null;if(ex&&!(ex.data&&ex.data.type=='g'&&sl.type=='g')&&(ex.n!==w[0]||ex.c!==w[1]))ex=null;let t;
+  if(ex){Object.assign(ex,mraMake(K,sl,ex.id));t='تم تحديث البطاقة في السجل.'}else{L.push(mraMake(K,sl,Date.now()+Math.floor(Math.random()*1000)));t='تم حفظ البطاقة في السجل. الاستمارة فارغة الآن لبطاقة جديدة.'}
+  const nw={};K.keep.forEach(q=>{if(sl[q]!==undefined)nw[q]=sl[q]});MVX()[K.s]=nw;save();MRF[k]=MRF[k]||{};go();const e=$('#mraM');if(e)e.textContent=t};
+ const L_=$('#mraL'),C_=$('#mraC'),Q_=$('#mraQ'),f=MRF[k];
+ if(L_)L_.onchange=()=>{f.lv=L_.value;if(f.c&&f.lv&&lvOf(f.c)!=f.lv)f.c='';go()};
+ if(C_)C_.onchange=()=>{f.c=C_.value;go()};
+ if(Q_){let tm;Q_.oninput=()=>{clearTimeout(tm);tm=setTimeout(()=>{f.q=Q_.value;const p=Q_.selectionStart;go();const n=$('#mraQ');if(n){n.focus();try{n.setSelectionRange(p,p)}catch(e){}}},250)}}
+ document.querySelectorAll('[data-ro]').forEach(b=>b.onclick=function(){const id=+b.dataset.ro,r=mraL(K.s).find(x=>x.id===id);if(!r)return;const sl=mraSlot(K.s),go_=()=>{const d=mraCp(r.data);d._rid=r.id;MVX()[K.s]=d;save();go();window.scrollTo(0,0)};
+  if(K.has(sl)&&sl._rid!==id)twoTap(this,go_);else go_()});
+ document.querySelectorAll('[data-rd]').forEach(b=>b.onclick=function(){twoTap(this,()=>{const id=+b.dataset.rd,L=mraL(K.s),i=L.findIndex(x=>x.id===id);if(i>=0)L.splice(i,1);const sl=mraSlot(K.s);if(sl._rid===id)delete sl._rid;if(MRS[k])MRS[k].delete(id);save();go()})});
+ const S=MRS[k]||(MRS[k]=new Set()),A=$('#mraA'),sync=()=>{if(A){const cb=[...document.querySelectorAll('[data-rk]')];A.checked=cb.length>0&&cb.every(c=>c.checked)}};
+ document.querySelectorAll('[data-rk]').forEach(c=>c.onchange=()=>{const id=+c.dataset.rk;if(c.checked)S.add(id);else S.delete(id);sync()});
+ if(A)A.onchange=()=>{document.querySelectorAll('[data-rk]').forEach(c=>{c.checked=A.checked;const id=+c.dataset.rk;if(A.checked)S.add(id);else S.delete(id)})};
+ const pr=$('#mraPR');if(pr)pr.onclick=()=>mraPrint(k);const pd=$('#mraPD');if(pd)pd.onclick=()=>mraPdf(k)}
+function mraNote(k){const K=MRA[k],sl=mraSlot(K.s),n=$('#mraN');if(!n)return;const L=mraL(K.s).filter(r=>r.id!==sl._rid&&(K.cls?String(r.c)==sl.c:(r.n===sl.n&&r.c===sl.c)||(r.data&&r.data.type=='g'&&(r.data.list||[]).some(z=>z&&z.n===sl.n&&z.c===(sl.c||sl.pc)))));
+ const nmv=K.cls?sl.c:sl.n;if(!nmv||!L.length){n.innerHTML='';return}L.sort((a,b)=>String(b.d).localeCompare(String(a.d)));
+ n.innerHTML=`<p class="mran">ℹ️ ${K.cls?'لهذا القسم':'لهذا التلميذ(ة)'} ${L.length} ${L.length==1?'بطاقة محفوظة':'بطاقات محفوظة'} في السجل، آخرها بتاريخ ${esc(mraFD(L[0].d))}. <button class="btn s xb" id="mraNS">عرضها في السجل</button></p>`;
+ $('#mraNS').onclick=()=>{MRF[k]={lv:'',c:'',q:nmv};go();const p=$('#mraP');if(p)try{p.scrollIntoView({block:'start'})}catch(e){}}}
+function mraInject(){mraPrClear();if(!MRA[cur])return;const ex=document.querySelector('#m .exw>.noprint');if(!ex||$('#mraP'))return;ex.insertAdjacentHTML('beforeend',mraPanel(cur));mraBind(cur);mraNote(cur)}
+document.addEventListener('change',e=>{const K=MRA[cur];if(!K||!e.target||e.target.id!==K.sel)return;setTimeout(()=>{try{if(cur==='mva'){const a=mraSlot('acc');if(a.type=='g'){const nm=e.target.value;if(nm){const n=$('#mraN'),L=mraL('acc').filter(r=>r.data&&((r.n===nm)||(r.data.list||[]).some(z=>z&&z.n===nm&&z.c===a.pc)));if(n)n.innerHTML=L.length?`<p class="mran">ℹ️ للتلميذ(ة) ${esc(nm)} ${L.length} ${L.length==1?'بطاقة محفوظة':'بطاقات محفوظة'} في السجل.</p>`:''}return}}mraNote(cur)}catch(x){}},0)});
+mraMig();
+{const _gm=go;go=function(){_gm.apply(this,arguments);try{mraInject()}catch(e){}}}
+/* ===== سجل المقابلات: «تسجيل لقاء المتابعة» للمقابلات التي فيها موعد متابعة فقط ===== */
+let MVFU=null;
+const mfuKids=(L,id)=>L.filter(q=>q&&q.pf===id).sort((a,b)=>String(a.d).localeCompare(String(b.d)));
+function mfuDeco(){const box=$('#mvl');if(!box)return;const L=MVX().itv;
+ box.querySelectorAll('.card.mvr').forEach(cd=>{const b=cd.querySelector('[data-me]');if(!b)return;const id=+b.dataset.me,r=L.find(q=>q.id===id);if(!r)return;const info=cd.querySelector('div[style*="flex:1"]');
+  if(r.pf){const p=L.find(q=>q.id===r.pf);if(info)info.insertAdjacentHTML('beforeend',`<div class="mfu" style="margin-top:4px"><span class="tag nt">↪ متابعة لمقابلة ${p?esc(mvDt(p.d)):'سابقة'}</span></div>`)}
+  const K=mfuKids(L,r.id);
+  if(K.length){if(info)info.insertAdjacentHTML('beforeend',`<div class="mfu" style="margin-top:4px;color:var(--ok);font-size:13px;font-weight:700">✔ تمت المتابعة بتاريخ ${K.map(k=>esc(mvDt(k.d))).join('، ')}</div>`)}
+  else if(r.fd){b.insertAdjacentHTML('beforebegin',`<button class="btn s mfu" data-mfu="${r.id}">📅 تسجيل لقاء المتابعة</button>`)}});
+ box.querySelectorAll('[data-mfu]').forEach(bt=>bt.onclick=()=>mfuStart(+bt.dataset.mfu))}
+function mfuStart(pid){const x=MVX(),p=x.itv.find(q=>q.id===pid);if(!p)return;mvEd=null;MVFU=null;go();
+ const set=(id,v,ch)=>{const e=$(id);if(!e)return;e.value=v;if(ch)e.dispatchEvent(new Event('change'))};
+ set('#ml',lvOf(p.c),1);set('#mc',p.c,1);set('#mn',p.n);set('#md',p.fd||today());set('#mw',p.w);set('#mr',p.r);
+ ['#ms','#mdc','#mf','#mt'].forEach(i=>set(i,''));const st=$('#mst');if(st)st.selectedIndex=0;
+ const fm=$('#mvs')&&$('#mvs').closest('.card');if(fm){const h=fm.querySelector('h3');if(h)h.textContent='لقاء متابعة';
+  h&&h.insertAdjacentHTML('afterend',`<p class="mran mfu">↪ متابعة لمقابلة ${esc(p.n)} — ${esc(p.c)} بتاريخ ${esc(mvDt(p.d))}. عند الحفظ تُسجَّل مقابلة جديدة مرتبطة بها، وتصبح حالة المقابلة الأولى «${MV_ST[1]}». <button class="btn s" id="mfuX">إلغاء</button></p>`);
+  $('#mfuX').onclick=()=>{MVFU=null;go()}}
+ MVFU={pid,n0:x.itv.length,ids:new Set(x.itv.map(q=>q.id))};try{(fm||document.body).scrollIntoView({block:'start'})}catch(e){}}
+function mfuAfter(){if(!MVFU)return;const F=MVFU;MVFU=null;if(cur!=='mvl'||mvEd)return;const x=MVX(),nw=x.itv.filter(q=>!F.ids.has(q.id));if(nw.length!==1||x.itv.length!==F.n0+1)return;
+ const r=nw[0],p=x.itv.find(q=>q.id===F.pid);if(!p||r.n!==p.n||r.c!==p.c)return;r.pf=p.id;p.st=MV_ST[1];save();mvList()}
+{const _ml=mvList;mvList=function(){_ml.apply(this,arguments);try{mfuDeco()}catch(e){}}}
+{const _gf=go;go=function(){_gf.apply(this,arguments);try{mfuAfter()}catch(e){}}}
+
+/* ===== سجل زيارات الآباء: الزائر، أسباب متعددة، ملاحظات، تصفية وطباعة ===== */
+const VIS_W=['الأم','الأب','الأخ / الأخت','الجد / الجدة','ولي أمر آخر'];
+const VIS_R=['تبرير غياب أو تأخر','الاستفسار عن الغياب','السلوك والانضباط','التحصيل الدراسي والنتائج','استدعاء من الإدارة','سحب وثيقة أو شهادة','التوجيه','وضعية صحية أو اجتماعية','أخرى'];
+let VF={lv:'',c:'',a:'',b:''},VSEL=new Set();
+const visD=v=>{const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(v||'');return m?m[3]+'/'+m[2]+'/'+m[1]:(v||'')};
+function visL(){return (db.visits||[]).filter(v=>v&&typeof v=='object')}
+function visFil(){return visL().filter(v=>{const c=cls(v.s);return (!VF.lv||lvOf(c)==VF.lv)&&(!VF.c||c==VF.c)&&(!VF.a||String(v.d)>=VF.a)&&(!VF.b||String(v.d)<=VF.b)})}
+function visHTML(){const L=visL(),F=visFil().slice().reverse(),cs=[...new Set(L.map(v=>cls(v.s)).filter(Boolean))].sort(cmpCls),ls=[...new Set(cs.map(lvOf))].sort((a,b)=>LVO(a)-LVO(b));
+ const form=`<div class="card mvf noprint" style="display:block"><h3 style="margin-top:0">إضافة زيارة</h3><div class="fg"><div><label for="vs">التلميذ(ة)</label><select id="vs">${stuG()}</select></div><div><label for="vd">تاريخ الزيارة</label><input type="date" id="vd" value="${today()}"></div><div><label for="vw">الزائر</label><select id="vw">${VIS_W.map(w=>`<option>${w}</option>`).join('')}</select></div></div>
+ <label style="display:block;margin:10px 0 4px">سبب الزيارة <small style="color:var(--mu)">(يمكن اختيار أكثر من سبب)</small></label><div class="vrg">${VIS_R.map((r,i)=>`<label class="chk vrc"><input type="checkbox" data-vr="${i}"> ${r}</label>`).join('')}</div>
+ <input id="vro" placeholder="اكتب السبب الآخر" aria-label="السبب الآخر" style="display:none;width:100%;margin-top:8px">
+ <label for="vn" style="display:block;margin:10px 0 4px">ملاحظات (اختياري)</label><input id="vn" style="width:100%">
+ <div class="btns" style="margin-top:12px"><button class="btn" id="vadd">إضافة زيارة</button></div><p class="sub" id="vm" aria-live="polite"></p></div>`;
+ const item=v=>`<div class="mrai"><input type="checkbox" data-vk="${v.id}" aria-label="تحديد"${VSEL.has(String(v.id))?' checked':''}><div class="mrat"><b>${esc(nm(v.s)||'تلميذ غير موجود')}</b>${cls(v.s)?` <span>— ${esc(cls(v.s))}</span>`:''}<small>${esc(visD(v.d))}${v.w?' · '+esc(v.w):''} · ${esc(v.r||'بلا سبب')}${v.n?' · '+esc(v.n):''}</small></div><button class="btn s xb" data-dv="${v.id}">حذف</button></div>`;
+ const log=`<div class="card mvf noprint mra" style="display:block"><div class="mrah"><b>السجل</b><span class="tag nt">${L.length}</span></div>
+ ${L.length?`<div class="fg"><div><label for="vfl">المستوى</label><select id="vfl"><option value="">جميع المستويات</option>${ls.map(l=>`<option value="${l}"${l==VF.lv?' selected':''}>${LV[l]||l}</option>`).join('')}</select></div><div><label for="vfc">القسم</label><select id="vfc"><option value="">جميع الأقسام</option>${cs.filter(c=>!VF.lv||lvOf(c)==VF.lv).map(c=>`<option${c==VF.c?' selected':''}>${esc(c)}</option>`).join('')}</select></div><div><label for="vfa">من تاريخ</label><input type="date" id="vfa" value="${esc(VF.a)}"></div><div><label for="vfb">إلى تاريخ</label><input type="date" id="vfb" value="${esc(VF.b)}"></div></div>
+ ${F.length?`<label class="mraa"><input type="checkbox" id="vsa"${F.every(v=>VSEL.has(String(v.id)))?' checked':''}> تحديد الكل</label><div class="mral">${F.map(item).join('')}</div><div class="btns" style="margin-top:8px"><button class="btn s xb" id="vpr">🖨️ طباعة</button><button class="btn s xb" id="vpd">⬇ PDF</button></div>`:'<p class="sub" style="margin:6px 0">لا توجد زيارات مطابقة.</p>'}<p class="sub" id="vpm" aria-live="polite" style="margin:6px 0 0"></p>`:'<div class="empty">لا توجد زيارات مسجلة.</div>'}</div>`;
+ return `<h2>سجل زيارات الآباء</h2>${form}${log}<div id="visPrint" class="ovx"></div>`}
+function visPages(R){const per=a=>a?visD(a):'';const pd=VF.a||VF.b?((VF.a?'من '+per(VF.a):'')+(VF.a&&VF.b?' ':'')+(VF.b?'إلى '+per(VF.b):'')):'جميع الزيارات';
+ const rows=R.slice().sort((a,b)=>String(a.d).localeCompare(String(b.d))||a.id-b.id).map((v,i)=>[i+1,visD(v.d),nm(v.s)||'—',cls(v.s)||'—',v.w||'—',v.r||'—',v.n||'']);
+ return tblPages('سجل زيارات الآباء والأولياء'+(VF.c?' — '+VF.c:''),[['ر.ت','9mm'],['التاريخ','20mm'],['التلميذ(ة)','36mm'],['القسم','18mm'],['الزائر','18mm'],['سبب الزيارة',''],['ملاحظات','']],rows,{cn:pd,cl:'الفترة',per:14,fm:12}).replace(/<table class="sh"/g,'<table class="sh mvt"')}
+function visPick(){return visFil().filter(v=>VSEL.has(String(v.id)))}
+function bindVis(){const q=s=>document.querySelector(s);
+ const oth=document.querySelector(`[data-vr="${VIS_R.length-1}"]`);if(oth)oth.onchange=()=>{q('#vro').style.display=oth.checked?'block':'none'};
+ q('#vadd').onclick=()=>{const s=q('#vs').value,d=q('#vd').value,m=q('#vm');if(!s||!d){m.textContent='اختر التلميذ(ة) وحدّد التاريخ.';return}
+  const rs=[...document.querySelectorAll('[data-vr]:checked')].map(c=>VIS_R[+c.dataset.vr]),ro=q('#vro').value.trim(),parts=rs.filter(r=>r!=='أخرى');if(rs.includes('أخرى'))parts.push(ro||'أخرى');
+  db.visits.push({id:Date.now(),s,d,w:q('#vw').value,rs,ro:rs.includes('أخرى')?ro:'',r:parts.join('، '),n:q('#vn').value.trim()});save();go()};
+ const fl=q('#vfl');if(fl)fl.onchange=()=>{VF.lv=fl.value;if(VF.c&&VF.lv&&lvOf(VF.c)!=VF.lv)VF.c='';go()};
+ const fc=q('#vfc');if(fc)fc.onchange=()=>{VF.c=fc.value;go()};
+ const fa=q('#vfa');if(fa)fa.onchange=()=>{VF.a=fa.value;go()};const fb=q('#vfb');if(fb)fb.onchange=()=>{VF.b=fb.value;go()};
+ const A=q('#vsa'),sync=()=>{if(A){const cb=[...document.querySelectorAll('[data-vk]')];A.checked=cb.length>0&&cb.every(c=>c.checked)}};
+ document.querySelectorAll('[data-vk]').forEach(c=>c.onchange=()=>{if(c.checked)VSEL.add(c.dataset.vk);else VSEL.delete(c.dataset.vk);sync()});
+ if(A)A.onchange=()=>document.querySelectorAll('[data-vk]').forEach(c=>{c.checked=A.checked;if(A.checked)VSEL.add(c.dataset.vk);else VSEL.delete(c.dataset.vk)});
+ const pr=q('#vpr');if(pr)pr.onclick=()=>{const R=visPick(),m=q('#vpm');if(!R.length){m.textContent='حدّد زيارة أو أكثر.';return}q('#visPrint').innerHTML=visPages(R);doPrint()};
+ const pd=q('#vpd');if(pd)pd.onclick=()=>{const R=visPick(),m=q('#vpm');if(!R.length){m.textContent='حدّد زيارة أو أكثر.';return}if(!(window.html2canvas&&window.jspdf)){q('#visPrint').innerHTML=visPages(R);pdfOut([...document.querySelectorAll('#visPrint .pg')],'x',m);return}const d=document.createElement('div');d.innerHTML=visPages(R);pdfOut([...d.querySelectorAll('.pg')],'زيارات-الآباء-'+today()+'.pdf',m)}}
+
+/* ===== استيراد من مسار: لائحة «الملفات المستوردة» لكل بطاقة، وحذف/استبدال ملفات التحويلات والقن السري وأولياء الأمور ===== */
+const IMPF_IN={lst:'#fl',org:'#of',sec:'#sf2',tut:'#tf',trf:'#t1',stt:'#st1',prv:'#cf2'};
+const IMPF_DEL={trf:1,sec:1,tut:1};
+let IMPCUR=null,IMPQ=null;
+function IF(){if(!db.impF||typeof db.impF!='object'||Array.isArray(db.impF))db.impF={};return db.impF}
+function ifL(k){const F=IF();if(!Array.isArray(F[k]))F[k]=[];F[k]=F[k].filter(e=>e&&typeof e=='object');return F[k]}
+const ifId=()=>Date.now()+Math.floor(Math.random()*1e6);
+const ifCodeCls=()=>{const m={};S.forEach(s=>{const k=kU(sx(s).k);if(k&&!m[k])m[k]=s.c});return m};
+const ifTrG=r=>{const t=r.t||'',kind=t=='out'?'out':(/اشهاد/.test(N_(r.ty))?'cert':'in');return kind+'|'+trLv('',r.lv)};
+/* البيانات المستوردة قبل هذا التحديث تظهر كمدخل واحد «بيانات مستوردة سابقاً» */
+function ifLegacy(){const F=IF();
+ if(!Array.isArray(F.trf)){const keys=[];Object.entries(db.tin||{}).forEach(([k,r])=>keys.push(['in|'+k,ifTrG(Object.assign({t:'in'},r))]));Object.entries(db.tout||{}).forEach(([k,r])=>keys.push(['out|'+k,ifTrG(Object.assign({t:'out'},r))]));F.trf=keys.length?[{id:ifId(),name:'بيانات مستوردة سابقاً',legacy:1,t:(db.imp&&db.imp.trf&&db.imp.trf.t)||0,keys}]:[]}
+ if(!Array.isArray(F.sec)){const cc=ifCodeCls(),keys=Object.keys(db.sec||{}).map(k=>[k,cc[k]||'?']);F.sec=keys.length?[{id:ifId(),name:'بيانات مستوردة سابقاً',legacy:1,t:(db.imp&&db.imp.sec&&db.imp.sec.t)||0,keys}]:[]}
+ if(!Array.isArray(F.tut))F.tut=[]}
+/* هل ما زال المفتاح موجوداً في البيانات؟ */
+const IFK={out:'المغادرون',in:'الوافدون',cert:'الانتقال الإشهادي'};
+function ifLegName(k,g){if(k=='trf'){const [a,l]=String(g).split('|');return IFK[a]+(l&&l!='?'?' — '+stLab(l):'')}return k=='sec'?'القن السري — '+g:String(g)}
+function ifSplit(){['trf','sec'].forEach(k=>{const L=ifL(k);for(let i=L.length-1;i>=0;i--){const e=L[i];if(!e.legacy)continue;const G=[...new Set((e.keys||[]).map(q=>q[1]))];if(G.length<2&&e.name!=='بيانات مستوردة سابقاً')continue;L.splice(i,1,...G.map(g=>({id:ifId(),name:ifLegName(k,g),legacy:1,t:e.t,keys:e.keys.filter(q=>q[1]===g)})))}})}
+function ifHas(k,key){if(k=='trf'){const i=key.indexOf('|'),t=key.slice(0,i),c=key.slice(i+1);return !!(t=='in'?(db.tin||{})[c]:(db.tout||{})[c])}if(k=='sec')return (db.sec||{})[key]!=null;if(k=='tut'){const o=INF[key];return !!(o&&(o.pn||o.pt))}return true}
+function ifDrop(k,e,onlyG){const L=ifL(k),others=new Set();L.forEach(x=>{if(x!==e)(x.keys||[]).forEach(q=>others.add(q[0]))});
+ const rm=(e.keys||[]).filter(q=>!onlyG||onlyG.has(q[1]));
+ rm.forEach(q=>{const key=q[0];if(others.has(key))return;
+  if(k=='trf'){const i=key.indexOf('|'),t=key.slice(0,i),c=key.slice(i+1);if(t=='in')delete db.tin[c];else delete db.tout[c]}
+  else if(k=='sec'){delete db.sec[key]}
+  else if(k=='tut'){const o=INF[key];if(o){if(q[2]&&o.pn===q[2])delete o.pn;if(q[3]&&o.pt===q[3])delete o.pt}}});
+ const keep=onlyG?(e.keys||[]).filter(q=>!onlyG.has(q[1])):[];
+ if(keep.length)e.keys=keep;else L.splice(L.indexOf(e),1)}
+/* قراءة الملفات لمعرفة المجموعات (النوع والمستوى، أو القسم) والمفاتيح قبل التطبيق */
+async function ifInfo(k,files){const out=[],cc=ifCodeCls();
+ for(const f of files){const wb=await rdWb(f);let keys=[];
+  if(k=='trf')keys=readTransfers(wb).map(r=>[r.t+'|'+r.k,ifTrG(r)]);
+  else if(k=='sec')keys=readSecrets(wb).map(r=>[r.k,cc[r.k]||'?']);
+  else if(k=='tut'){const idx={};S.forEach(s=>{const c=kU(sx(s).k);if(c)idx[c]=s});keys=readTutors(wb).filter(t=>idx[t.k]&&(t.pn||t.pt)).map(t=>{const s=idx[t.k];return [s.c+'|'+s.n,s.c,t.pn||'',t.pt||'']})}
+  out.push({name:f.name,keys})}
+ return out}
+function ifCommit(k,info){const L=ifL(k);info.forEach(i=>{if(i.keys.length)L.push({id:ifId(),name:i.name,t:Date.now(),keys:i.keys})});ifSync(k)}
+function ifSync(k){const n=ifView(k).length;db.imp=db.imp||{};if(db.imp[k]){db.imp[k].f=n==1?ifView(k)[0].name:(n?n+' ملفات':'')}}
+/* لفّ دوال الاستيراد ذات الإضافة فقط: تسأل «استبدال؟» إذا وُجد ملف سابق من نفس النوع والمستوى أو القسم */
+function ifWrap2(k,fn){return async function(files){ifLegacy();ifSplit();const info=await ifInfo(k,files),G=new Set(info.flatMap(i=>i.keys.map(q=>q[1])));
+ const over=ifL(k).filter(e=>(e.keys||[]).some(q=>G.has(q[1])));
+ if(over.length&&G.size){IMPQ={k,fn,files,info,over:over.map(e=>e.id),G:[...G]};return 'يوجد ملف سابق '+(k=='trf'?'من نفس النوع والمستوى':'لنفس القسم')+': '+over.map(e=>e.name).join('، ')+'. اختر أسفله: استبدال أو إضافة بجانبه.'}
+ const r=await fn(files);if(!/^لم أجد/.test(r)){ifCommit(k,info);save()}return r}}
+impTransfers=ifWrap2('trf',impTransfers);impSecrets=ifWrap2('sec',impSecrets);impTutors=ifWrap2('tut',impTutors);
+async function ifDecide(rep){const Q=IMPQ;IMPQ=null;if(!Q)return;const mid={trf:'m4',sec:'m2',tut:'m3'}[Q.k];let r;
+ try{if(rep){const G=new Set(Q.G);ifL(Q.k).filter(e=>Q.over.includes(e.id)).forEach(e=>ifDrop(Q.k,e,G))}
+  r=await Q.fn(Q.files);if(!/^لم أجد/.test(r)){ifCommit(Q.k,Q.info);r=(rep?'تم استبدال الملف السابق. ':'أُضيف الملف بجانب السابق. ')+r}save()}catch(x){r='تعذّرت قراءة الملف.'}
+ sel['m'+mid]=r;go()}
+/* بطاقات الاستبدال التلقائي: تتبّع الملفات للعرض فقط */
+function ifCommit1(k,name,groups,n){const L=ifL(k),G=new Set(groups);L.forEach(e=>{e.groups=(e.groups||[]).filter(g=>!G.has(g))});for(let i=L.length-1;i>=0;i--)if(!L[i].groups.length)L.splice(i,1);L.push({id:ifId(),name,t:Date.now(),n,groups:[...G]});ifSync(k)}
+{const _rd=rdWb;rdWb=async function(f){IMPCUR=f;return _rd.apply(this,arguments)}}
+{const _pw=parseWb2;parseWb2=function(wb){const o=_pw.apply(this,arguments);try{const ks=Object.keys(o||{});if(ks.length&&IMPCUR&&cur==='imp')ifCommit1('lst',IMPCUR.name,ks,ks.reduce((a,c)=>a+o[c].length,0))}catch(e){}return o}}
+{const _o=impOrig;impOrig=async function(fs){const r=await _o.apply(this,arguments);try{if(!/^لم أجد/.test(r))for(const f of fs){const L=readStudents(await rdWb(f)).filter(x=>x.k);if(L.length)ifCommit1('org',f.name,[...new Set(L.map(x=>lvOf(x.c)))],L.length)}save()}catch(e){}return r}}
+{const _s=impStat;impStat=async function(fs){const r=await _s.apply(this,arguments);try{if(/^تم/.test(r)){ifCommit1('stt',fs[0].name,['all'],(db.stat&&db.stat.rows||[]).length);save()}}catch(e){}return r}}
+{const _p=impPrev;impPrev=async function(fs){const y=(($('#cyr')||{}).value||'').trim(),r=await _p.apply(this,arguments);try{if(/^تمت/.test(r)){ifCommit1('prv',fs.length==1?fs[0].name:fs.length+' ملفات',[y],((db.arch[y]||{}).list||[]).length);save()}}catch(e){}return r}}
+/* ما يُعرض: فقط الملفات التي ما زالت بياناتها موجودة */
+function ifView(k){const L=ifL(k);
+ if(IMPF_DEL[k])return L.map(e=>({e,name:e.name,t:e.t,n:(e.keys||[]).filter(q=>ifHas(k,q[0])).length,legacy:e.legacy})).filter(x=>x.n>0);
+ const live=k=='lst'?new Set(Object.keys(CL).filter(c=>CL[c].length)):k=='org'?new Set(((db.orig&&db.orig.list)||[]).map(x=>lvOf(x.c))):k=='prv'?new Set(Object.keys(db.arch||{})):k=='stt'?new Set(db.stat&&db.stat.rows&&db.stat.rows.length?['all']:[]):new Set();
+ return L.map(e=>({e,name:e.name,t:e.t,n:e.n,g:(e.groups||[]).filter(g=>live.has(g))})).filter(x=>x.g.length)}
+function ifPanel(k){const V=ifView(k);if(!V.length)return '';const del=IMPF_DEL[k],unit=k=='stt'?'سطر':'تلميذ';
+ return `<details class="impfl"><summary>📄 الملفات المستوردة (${V.length})</summary>${V.map(x=>`<div class="impfr"><div class="impfn"><span class="fn">${esc(x.name)}</span><small>${x.n!=null?esc(x.n+' '+unit):''}${x.t?' · '+fmtD(x.t):''}${x.g&&k=='lst'?' · '+esc(x.g.length+' '+(x.g.length==1?'قسم':'أقسام')):''}${x.g&&(k=='org')?' · '+esc(x.g.map(stLab).join('، ')):''}</small></div>${del?`<button class="btn s xb" data-ifx="${k}|${x.e.id}" aria-label="حذف الملف">✕</button>`:''}</div>`).join('')}${del?'<p class="sub" style="margin:6px 0 0">✕ يحذف الملف والتلاميذ الذين جاؤوا منه فقط (من يوجد في ملف آخر يبقى).</p>':''}</details>`}
+function ifInject(){if(cur!=='imp')return;ifLegacy();ifSplit();
+ if(IMPQ){const inp=document.querySelector(IMPF_IN[IMPQ.k]),cd=inp&&inp.closest('.card');if(cd&&!cd.querySelector('.impq')){cd.insertAdjacentHTML('beforeend',`<div class="impq"><div class="btns"><button class="btn s xb" id="ifqR">استبدال الملف السابق</button><button class="btn s xb" id="ifqA">إضافة بجانبه</button><button class="btn s xb" id="ifqC">إلغاء</button></div></div>`);$('#ifqR').onclick=()=>ifDecide(true);$('#ifqA').onclick=()=>ifDecide(false);$('#ifqC').onclick=()=>{IMPQ=null;sel['m'+({trf:'m4',sec:'m2',tut:'m3'}[cd.querySelector('#t1')?'trf':cd.querySelector('#sf2')?'sec':'tut'])]='أُلغي الاستيراد. لم يتغير شيء.';go()};try{cd.scrollIntoView({block:'center'})}catch(x){}}}}
+{const _gi=go;go=function(){try{if(cur==='imp'){ifLegacy();ifSplit();Object.keys(IMPF_IN).forEach(k=>{if(ifL(k).length)ifSync(k)})}}catch(e){}_gi.apply(this,arguments);try{if(cur!=='imp')IMPQ=null;ifInject()}catch(e){}}}
+{const _wd=wipeData;wipeData=function(){delete db.impF;IMPQ=null;return _wd.apply(this,arguments)}}
+
 applyT();patt();go();
 
 function stBadge(){try{dr.querySelectorAll('.stb').forEach(x=>x.remove());if(!hasOrig())return;const D=mobData();if(D.ok)return;const b=dr.querySelector('[data-v="ltr"]');if(!b)return;const m='<span class="stb" title="الإحصاء يحتاج مراجعة"></span>';b.insertAdjacentHTML('beforeend',m);const sb=b.closest('.sb'),gh=sb&&sb.previousElementSibling;if(gh)gh.querySelector('.lb').insertAdjacentHTML('beforeend',m)}catch(e){}}
@@ -2918,6 +3195,6 @@ function stBadge(){try{dr.querySelectorAll('.stb').forEach(x=>x.remove());if(!ha
   const v=e.state&&e.state.v;if(!v||v===cur)return;pop=true;cur=v;try{go()}finally{pop=false}});
 }
 </script>
-<script>if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));</script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').then(r=>{try{r.update()}catch(e){}}).catch(()=>{})})}</script>
 </body>
 </html>
