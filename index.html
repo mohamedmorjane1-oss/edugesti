@@ -365,8 +365,8 @@ html.lgt main .egb{border-color:#d3e3dc}
 </style>
 <style>
 /* v149: لون الشريط (الجانبي والعلوي فقط) */
-html[data-bar=pt] #dr,html[data-bar=pt] header{--bg:#08263a;--bg2:#0e3d55;--bar:#145670;--bar2:#0e465d}
-html[data-bar=ry] #dr,html[data-bar=ry] header{--bg:#081a48;--bg2:#113893;--bar:#0f2a6d;--bar2:#0a1c44}
+html[data-bar=pt] #dr,html[data-bar=pt] header{--bg:#134a63;--bg2:#1f6c88;--bar:#1f7591;--bar2:#18637d}
+html[data-bar=ry] #dr,html[data-bar=ry] header{--bg:#123178;--bg2:#1f4fb6;--bar:#1c46a3;--bar2:#163a8a}
 .sx .fg.bcl{grid-template-columns:repeat(3,minmax(0,1fr))!important}.sx .bcl .btn{gap:6px;padding:6px 4px;white-space:nowrap;min-width:0}.bcl .sw{width:16px;height:16px;border-radius:50%;border:1.5px solid #ffffff99;flex:none;display:inline-grid;place-items:center;color:#fff;font-size:11px;font-weight:700;line-height:1}.sx .bcl .btn.on .sw{width:18px;height:18px;border:2px solid #fff}html.lgt .bcl .btn:not(.on) .sw{border-color:#0003}
 .cpy{margin:22px 0 6px;padding:14px 8px 6px;border-top:1px solid #ffffff22;text-align:center;direction:ltr;font-family:Segoe UI,Arial,sans-serif;color:var(--mu);font-size:13px;line-height:1.7}.cpy b{display:block;font-size:16px;color:var(--tx);letter-spacing:.3px}
 #bsx{white-space:nowrap;letter-spacing:0}
@@ -669,7 +669,7 @@ function svToast(){let e=document.getElementById('svt');if(!e){e=document.create
 /* v148: حجم خط موحّد لمجموعة أسطر: أكبر حجم (حتى 13 على الأقل) يُبقي كل سطر في سطر واحد */
 function fitGroup(L){L=[...L].filter(e=>e.clientWidth);if(!L.length)return;L.forEach(e=>{e.style.fontSize='';e.style.whiteSpace='nowrap'});let f=parseFloat(getComputedStyle(L[0]).fontSize)||15;const over=()=>L.some(e=>e.scrollWidth>e.clientWidth+1);while(over()&&f>13){f-=.5;L.forEach(e=>e.style.fontSize=f+'px')}L.forEach(e=>{if(e.scrollWidth>e.clientWidth+1)e.style.whiteSpace=''})}
 function fitLine(el){if(!el||!el.clientWidth)return;el.style.fontSize='';el.style.whiteSpace='nowrap';let f=parseFloat(getComputedStyle(el).fontSize)||15;const f0=f;while(el.scrollWidth>el.clientWidth+1&&f>13){f-=.5;el.style.fontSize=f+'px'}if(el.scrollWidth>el.clientWidth+1){el.style.whiteSpace='';el.style.fontSize=''}}
-const BARC=[['','تركوازي','#0b5f6b'],['pt','بترولي','#145670'],['ry','ملكي','#113893']];
+const BARC=[['','تركوازي','#0b5f6b'],['pt','بترولي','#1f7591'],['ry','ملكي','#1f4fb6']];
 function setHTML(){
  const s=db.school,f=(k,l)=>`<div><label for="s_${k}">${l}</label><input id="s_${k}" data-f="${k}" value="${esc(s[k])}"></div>`,
   sec=(id,ic,ti,body,cls)=>`<details class="sx${cls?' '+cls:''}" data-sx="${id}"${SETO.has(id)?' open':''}><summary><span class="si" aria-hidden="true">${ic}</span>${ti}</summary><div class="sxb">${body}</div></details>`,
