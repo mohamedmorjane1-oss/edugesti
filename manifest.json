@@ -1,7 +1,7 @@
 {
   "name": "EduGesti",
   "short_name": "EduGesti",
-  "description": "التدبير التربوي الذكي",
+  "description": "التدبير التربوي",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
