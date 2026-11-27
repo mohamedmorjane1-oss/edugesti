@@ -481,9 +481,10 @@ const XP={users:'M9 11a3 3 0 1 0 0-6a3 3 0 1 0 0 6zM3 20c0-3.3 2.7-6 6-6s6 2.7 6
 const XI=(k,s)=>`<svg class="eic" viewBox="0 0 24 24"${s?` style="width:${s}px;height:${s}px"`:''} aria-hidden="true"><path d="${XP[k]||''}"/></svg>`;
 const XSUB={lcl:'list',lgen:'users',tls:'star',lsec:'lock',lcmp:'swap',ltr:'move',lreq:'mail',lsnd:'file',prn:'print',ent:'ticket',mvl:'chat',visits:'phone',mvn:'shield',mvw:'ear',mvt:'eye',mvz:'door',mvp:'grid',mvx:'bars',tcp:'users',ttb:'cal',gsh:'grid',mrA:'bars',mrB:'star',mrm:'file',mrc:'check',exset:'gear',exg:'users',exp:'print'};
 const sic=k=>`<svg class="sic" viewBox="0 0 24 24" aria-hidden="true"><path d="${XP[XSUB[k]||'file']}"/></svg>`;
-const NWF={'تلميذ':['تلميذ','تلاميذ','تلميذاً'],'قسم':['قسم','أقسام','قسماً'],'ملفات':['ملف','ملفات','ملفاً'],'أستاذ':['أستاذ','أساتذة','أستاذاً'],'ورقة':['ورقة','أوراق','ورقة'],'ساعة':['ساعة','ساعات','ساعة'],'مترشح':['مترشح','مترشحين','مترشحاً'],'قاعة':['قاعة','قاعات','قاعة'],'صفحة':['صفحة','صفحات','صفحة'],'مادة':['مادة','مواد','مادة'],'صور':['صورة','صور','صورة'],'مجموعة':['مجموعة','مجموعات','مجموعة'],'رسالة':['رسالة','رسائل','رسالة'],'حارس':['حارس','حراس','حارساً'],'زيارة':['زيارة','زيارات','زيارة'],'اتصال':['اتصال','اتصالات','اتصالاً'],'وافد':['وافد','وافدين','وافداً'],'مغادر':['مغادر','مغادرين','مغادراً'],'بادج':['بادج','بادجات','بادجاً']};
+const NWF={'تلميذ':['تلميذ','تلاميذ','تلميذاً'],'قسم':['قسم','أقسام','قسماً'],'ملفات':['ملف','ملفات','ملفاً'],'أستاذ':['أستاذ','أساتذة','أستاذاً'],'ورقة':['ورقة','أوراق','ورقة'],'ساعة':['ساعة','ساعات','ساعة'],'مترشح':['مترشح','مترشحين','مترشحاً'],'قاعة':['قاعة','قاعات','قاعة'],'صفحة':['صفحة','صفحات','صفحة'],'مادة':['مادة','مواد','مادة'],'صور':['صورة','صور','صورة'],'مجموعة':['مجموعة','مجموعات','مجموعة'],'رسالة':['رسالة','رسائل','رسالة'],'حارس':['حارس','حراس','حارساً'],'زيارة':['زيارة','زيارات','زيارة'],'اتصال':['اتصال','اتصالات','اتصالاً'],'وافد':['وافد','وافدين','وافداً'],'مغادر':['مغادر','مغادرين','مغادراً'],'بادج':['بادج','بادجات','بادجاً'],'بطاقة':['بطاقة','بطاقات','بطاقة'],'ملاحظة':['ملاحظة','ملاحظات','ملاحظة']};
 /* v151: العدد والمعدود (2–10 جمع، 11–99 مفرد منصوب) */
 function nW(n,w){const f=NWF[w]||[w,w,w],v=+n;let t=f[0];if(isFinite(v)&&Number.isInteger(v)){const r=Math.abs(v)%100;if(v>=2&&r>=2&&r<=10)t=f[1];else if(r>=11)t=f[2]}return n+' '+t}
+const nWw=(n,w)=>nW(n,w).slice(String(n).length+1);
 const S=[];
 let CL={};
 let db={visits:[]};
@@ -750,12 +751,12 @@ function homeHTML2(){
  const lvA=r=>stK(r)<6?' data-lv="'+(Math.floor(stK(r)/2)+1)+'"':'';
  const empty=`<div class="card xg-empty" style="display:block"><div class="xg-ei">${XI('xls',26)}</div><b>البنية التربوية غير متوفرة بعد</b><p>استورد ملف «إحصاء التمدرس» من مسار لتظهر هنا بطاقات المستويات.</p><button class="btn" onclick="cur='imp';go()">${XI('dl',17)}الانتقال إلى الاستيراد</button></div>`;
  /* ===== الهاتف ===== */
- const mobCards=rows.map(({r,t})=>`<div class="card edsc${t?' tt':''}"${t?'':lvA(r)} style="display:block"><div class="edh"><b>${esc(r.nm)}</b><span class="tag" style="background:#dcebe6;color:#0b4a54;white-space:nowrap;flex:none">${fx(r.c)} ${r.c==1?'قسم':'أقسام'}</span></div><div class="edm"><div><b>${fx(r.tn)}</b><span>المتمدرسون</span></div><div><b>${fx(r.tf)}</b><span>الإناث</span></div><div><b>${fx(r.avg)}</b><span>معدل القسم</span></div></div><div class="edr"><span>الجدد: <b>${fx(r.nn)}</b> (إناث ${fx(r.nf)})</span><span>المكررون: <b>${fx(r.rn)}</b> (إناث ${fx(r.rf)})</span></div><div class="edr"><span>غير ملتحقين: <b>${fx(r.ab)}</b> (إناث ${fx(r.abf)})</span><span>في طور التحويل: <b>${fx(r.tr)}</b> (إناث ${fx(r.trf)})</span></div></div>`).join('');
+ const mobCards=rows.map(({r,t})=>`<div class="card edsc${t?' tt':''}"${t?'':lvA(r)} style="display:block"><div class="edh"><b>${esc(r.nm)}</b><span class="tag" style="background:#dcebe6;color:#0b4a54;white-space:nowrap;flex:none">${fx(r.c)} ${nWw(r.c,'قسم')}</span></div><div class="edm"><div><b>${fx(r.tn)}</b><span>المتمدرسون</span></div><div><b>${fx(r.tf)}</b><span>الإناث</span></div><div><b>${fx(r.avg)}</b><span>معدل القسم</span></div></div><div class="edr"><span>الجدد: <b>${fx(r.nn)}</b> (إناث ${fx(r.nf)})</span><span>المكررون: <b>${fx(r.rn)}</b> (إناث ${fx(r.rf)})</span></div><div class="edr"><span>غير ملتحقين: <b>${fx(r.ab)}</b> (إناث ${fx(r.abf)})</span><span>في طور التحويل: <b>${fx(r.tr)}</b> (إناث ${fx(r.trf)})</span></div></div>`).join('');
  const mob=`<div class="hM"><div class="xg-band"><b>${esc(s.sc)}</b><span>${XI('cal',15)}${ds}</span></div><div class="hgrid"><div class="card hs hs2" style="display:block"><div class="hs2t"><div class="hsx"><b class="big">${tot}</b><div class="lbl">إجمالي التلاميذ</div></div><i class="hic hic1 hicl">${XI('users',24)}</i></div>${k?`<div class="hbar"><span style="width:${pm.toFixed(2)}%;background:#4fc3d9"></span><span style="width:${pf.toFixed(2)}%;background:#f5b942"></span></div>`:''}${tot?'':'<p class="sub" style="margin:8px 0 0">لا يوجد تلاميذ بعد. استورد اللوائح من «استيراد لائحة التلاميذ».</p>'}<div class="leg hleg"><span><i style="background:#4fc3d9"></i>ذكور <b>${m}</b>${k?' <span dir="ltr">('+Math.round(pm)+'%)</span>':''}</span><span><i style="background:#f5b942"></i>إناث <b>${f}</b>${k?' <span dir="ltr">('+Math.round(pf)+'%)</span>':''}</span></div></div><div class="stat hst2"><div class="hsx"><b>${cl.length}</b><span>أقسام نشطة</span></div><i class="hic hic1">${XI('pc',20)}</i></div><div class="stat hst2"><div class="hsx"><b>${lv.size}</b><span>مستويات نشطة</span></div><i class="hic hic2">${XI('lay',20)}</i></div></div>${has?mobCards+`<p class="sub" style="margin:8px 0 0">المصدر: ملف «إحصاء التمدرس» من مسار${st.yr?' ('+esc(st.yr)+')':''}. لتحديث الأرقام أعد استيراد الملف من «استيراد من مسار».</p>`:empty}</div>`;
  /* ===== الحاسوب ===== */
  const SC=[['إجمالي التلاميذ',tot,'users','var(--soft)','var(--icon)'],['أقسام نشطة',cl.length,'pc','var(--bb)','var(--bt)'],['ذكور',m,'male','var(--bb)','var(--bt)'],['إناث',f,'fem','var(--yb)','var(--yt)']];
  const QK=[['prn','ورقة الغياب','print'],['ent','ورقة الدخول','ticket'],['srch','البحث عن تلميذ','search'],['mvl','سجل المقابلات','chat'],['gsh','ورقة التنقيط','grid'],['imp','استيراد من مسار','dl']];
- const dskLv=R.map(r=>`<div class="card edsc"${lvA(r)} style="display:block"><div class="edh"><b>${esc(r.nm)}</b><span class="tag" style="background:#dcebe6;color:#0b4a54;white-space:nowrap;flex:none">${fx(r.c)} ${r.c==1?'قسم':'أقسام'}</span></div><div class="edm"><div><b>${fx(r.tn)}</b><span>المتمدرسون</span></div><div><b>${fx(r.tf)}</b><span>الإناث</span></div><div><b>${fx(r.avg)}</b><span>معدل القسم</span></div></div></div>`).join('');
+ const dskLv=R.map(r=>`<div class="card edsc"${lvA(r)} style="display:block"><div class="edh"><b>${esc(r.nm)}</b><span class="tag" style="background:#dcebe6;color:#0b4a54;white-space:nowrap;flex:none">${fx(r.c)} ${nWw(r.c,'قسم')}</span></div><div class="edm"><div><b>${fx(r.tn)}</b><span>المتمدرسون</span></div><div><b>${fx(r.tf)}</b><span>الإناث</span></div><div><b>${fx(r.avg)}</b><span>معدل القسم</span></div></div></div>`).join('');
  const dsk=`<div class="hD"><div class="xg-top"><div><div class="xg-h">الرئيسية</div><div class="xg-d">${ds} · الموسم الدراسي ${esc(yr())}</div></div><div class="xg-tools"><label class="xg-q">${XI('search',18)}<input id="xgq" type="search" placeholder="ابحث بالاسم أو رمز مسار" aria-label="بحث عن تلميذ"></label><button class="xg-th" id="xgth" aria-label="تبديل المظهر فاتح أو داكن">${XI('moon',20)}</button></div></div><div class="xg-hero"><div><div class="xg-hi">مرحباً بك</div><div class="xg-hn">${esc(s.sc)}</div><div class="xg-hi">المديرية الإقليمية ب${esc(s.dr)}</div></div><div class="xg-hb"><button class="xg-b1" onclick="cur='prn';go()">ورقة الغياب</button><button class="xg-b2" onclick="cur='imp';go()">استيراد من مسار</button></div></div><div class="xg-st">${SC.map(c=>`<div class="xg-sc"><span class="xg-si" style="background:${c[3]};color:${c[4]}">${XI(c[2],22)}</span><div><b>${c[1]}</b><span>${c[0]}</span></div></div>`).join('')}</div>${has?`<div class="xg-lv">${dskLv}</div>`:`<div style="margin-bottom:18px">${empty}</div>`}<div class="xg-qt">اختصارات سريعة</div><div class="xg-qk">${QK.map(q=>`<button class="xg-k" onclick="cur='${q[0]}';go()"><span>${XI(q[2],22)}</span>${q[1]}</button>`).join('')}</div></div>`;
  return mob+dsk}
 const esc=x=>String(x==null?'':x).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
@@ -1350,11 +1351,11 @@ function impLog(k,fs,msg){db.imp=db.imp||{};const o=db.imp[k]||{sg:[]},sg=fs.map
  return msg+(dup?'\nهذا الملف مستورد من قبل'+(prev?' بتاريخ '+fmtD(prev):'')+': البيانات موجودة بالفعل وتم تحديثها بنفس القيم.':'')}
 function impBadge(k){
  const I=(db.imp||{})[k]||{},n_=x=>Object.keys(x||{}).length;let t='';
- if(k=='lst'){const cs=Object.keys(CL).filter(c=>CL[c].length);if(cs.length)t=cs.length+' '+(cs.length==1?'قسم':'أقسام')+' · '+nW(S.length,'تلميذ')+''}
+ if(k=='lst'){const cs=Object.keys(CL).filter(c=>CL[c].length);if(cs.length)t=nW(cs.length,'قسم')+' · '+nW(S.length,'تلميذ')+''}
  else if(k=='sec'){const n=n_(db.sec);if(n)t=nW(n,'تلميذ')+' لديهم قن سري'}
  else if(k=='tut'){const n=Object.values(INF).filter(i=>i&&(i.pn||i.pt)).length;if(n)t=nW(n,'تلميذ')+' لديهم معطيات ولي الأمر'}
  else if(k=='trf'){const a=Object.values(db.tin||{}),e=a.filter(r=>/اشهاد/.test(N_(r.ty))).length,o=n_(db.tout);if(a.length||o)t=e+' وافداً إشهادياً · '+(a.length-e)+' وافداً فردياً · '+o+' مغادراً'}
- else if(k=='org'){const l=ddOrig(db.orig&&db.orig.list);if(l&&l.length){const cs=new Set(l.map(x=>x.c)).size;t=nW(l.length,'تلميذ')+' · '+cs+' '+(cs==1?'قسم':'أقسام')}}
+ else if(k=='org'){const l=ddOrig(db.orig&&db.orig.list);if(l&&l.length){const cs=new Set(l.map(x=>x.c)).size;t=nW(l.length,'تلميذ')+' · '+nW(cs,'قسم')}}
  else if(k=='prv'){const n=Object.keys(db.arch||{}).length;if(n)t=n+(n==1?' سنة مؤرشفة':' سنوات مؤرشفة')}
  else if(k=='stt'){const r=db.stat&&db.stat.rows;if(r&&r.length)t=r.length+' أسطر'+(db.stat.yr?' · السنة '+db.stat.yr:'')}
  if(!t)return '<div class="imb no">لم يُستورد بعد</div>';
@@ -1540,7 +1541,7 @@ function exCheck(){const x=X(),I=exInfo(),A=exCands(),tot=A.reduce((a,h)=>a+h.li
  if(x.hallsMan&&A.length&&+x.halls<A.length)o.push(['no','عدد قاعات الحراسة أقل من قاعات المترشحين.']);
  if(W){const c=dlCheck();if(c.none.length||c.two.length)o.push(['no','تقسيم القاعات على الكتابة غير مكتمل (لائحة تسليم الأوراق).'])}
  const n=o.filter(q=>q[0]=='no').length;
- return `<p class="${n?'exn er':'okb'}" style="margin:0 0 8px">${n?'⚠ '+n+' '+(n==1?'ملاحظة':'ملاحظات')+' قبل الامتحان':'✔ كل شيء جاهز'}</p>`+o.map(q=>`<div class="exck ${q[0]}"><span>${q[0]=='ok'?'✔':'⚠'}</span><span>${q[1]}</span></div>`).join('')}
+ return `<p class="${n?'exn er':'okb'}" style="margin:0 0 8px">${n?'⚠ '+nW(n,'ملاحظة')+' قبل الامتحان':'✔ كل شيء جاهز'}</p>`+o.map(q=>`<div class="exck ${q[0]}"><span>${q[0]=='ok'?'✔':'⚠'}</span><span>${q[1]}</span></div>`).join('')}
 function exSetHTML(){const P=exSetParts(),A=exCands(),tot=A.reduce((a,h)=>a+h.list.length,0),x=X(),c=(t,b)=>`<div class="card" style="display:block"><h3 style="margin-top:0">${t}</h3>${b}</div>`;
  return `<div class="exw"><div class="noprint"><h2>التهيئة للامتحان</h2><p class="sub">ابدأ من هنا: هذه المعطيات تُستعمل في «توزيع مهام مركز الامتحان» وفي جميع «مطبوعات الامتحان». تُحفظ تلقائياً.</p>
  ${c('1. معلومات الامتحان',P.info)}
@@ -1552,7 +1553,7 @@ function exSetHTML(){const P=exSetParts(),A=exCands(),tot=A.reduce((a,h)=>a+h.li
 function exFilterCard(){const x=X(),all=exCands(),total=all.reduce((a,h)=>a+h.list.length,0);
  const hallOpts='<option value="">كل القاعات</option>'+all.map(h=>`<option value="${h.hall}"${String(x.fHall)===String(h.hall)?' selected':''}>القاعة ${h.hall}${h.voc?' (مهني)':''} (${h.list.length})</option>`).join('');
  return `<div class="row" style="margin-top:10px"><div style="flex:1;min-width:150px"><label class="lg" for="x_fHall">القاعة</label><select id="x_fHall" data-x="fHall">${hallOpts}</select></div>${EXEXTRA()}</div>
- <p class="okb" style="margin:10px 0">${nW(total,'مترشح')} في ${all.length} ${all.length==1?'قاعة':'قاعات'}${total?` (أرقام الامتحان من ${+x.start||1} إلى ${(+x.start||1)+total-1})`:''}</p>`}
+ <p class="okb" style="margin:10px 0">${nW(total,'مترشح')} في ${nW(all.length,'قاعة')}${total?` (أرقام الامتحان من ${+x.start||1} إلى ${(+x.start||1)+total-1})`:''}</p>`}
 let EXLM='hall';
 let EXCUR='exa';
 function EXEXTRA(){const x=X(),cur=EXCUR;
@@ -1846,7 +1847,7 @@ function bindEx(){const x=X(),m=$('#m'),pm=()=>$('#pm');
  if(ck=='exk'){bindEk();return}
  if(ck=='ebd'){bindBd();return}
  if(cur=='exg'){m.querySelectorAll('[data-egt]').forEach(b=>b.onclick=()=>{EGT=b.dataset.egt;exKeep='';go()});if(EGT==='k'){bindEk();return}}
- if(EXNEW.some(o=>o[0]==ck)){const dm=$('#edlm');if(dm)dm.onchange=()=>{EXDLM=dm.value;go()};m.querySelectorAll('[data-dlw]').forEach(el=>el.onchange=()=>{const RG=dlRanges().map(r=>({n:r.n,a:r.a,b:r.b}));RG[+el.dataset.dlw][el.dataset.dlk]=+el.value;x.dlr=RG;save();go()});const dr=$('#dlreset');if(dr)dr.onclick=()=>{delete x.dlr;save();go()};const pg0=exSheets(ck),nc=$('#exnc');if(nc)nc.textContent=pg0.length+' '+(pg0.length==1?'ورقة':'أوراق')+' للطباعة حسب الاختيار الحالي';exShow(pg0);$('#exnp').onclick=()=>pr(ck);$('#exnd').onclick=()=>pd(ck);return}
+ if(EXNEW.some(o=>o[0]==ck)){const dm=$('#edlm');if(dm)dm.onchange=()=>{EXDLM=dm.value;go()};m.querySelectorAll('[data-dlw]').forEach(el=>el.onchange=()=>{const RG=dlRanges().map(r=>({n:r.n,a:r.a,b:r.b}));RG[+el.dataset.dlw][el.dataset.dlk]=+el.value;x.dlr=RG;save();go()});const dr=$('#dlreset');if(dr)dr.onclick=()=>{delete x.dlr;save();go()};const pg0=exSheets(ck),nc=$('#exnc');if(nc)nc.textContent=nW(pg0.length,'ورقة')+' للطباعة حسب الاختيار الحالي';exShow(pg0);$('#exnp').onclick=()=>pr(ck);$('#exnd').onclick=()=>pd(ck);return}
  if(EXV.includes(ck)&&ck!='exg'){const lm=$('#exlm');if(lm)lm.onchange=()=>{EXLM=lm.value};const sb=()=>ck=='exl'&&EXLM!='hall'?EXLM:undefined;$('#exp').onclick=()=>pr(ck,sb());$('#exd').onclick=()=>pd(ck,sb())}
  if(cur!='exg')return;
  const I=exInfo();
@@ -3209,7 +3210,7 @@ function mraPdf(k){const R=mraPick(k),m=$('#mraM2');if(!R.length){if(m)m.textCon
 function mraBind(k){return mraBind2(k)}
 function mraNote(k){return mraNote2(k)}
 function mraInject(){mraPrClear();if(!MRA[cur])return;const ex=document.querySelector('#m .exw>.noprint');if(!ex||$('#mraP'))return;ex.insertAdjacentHTML('beforeend',mraPanel(cur));mraBind(cur);mraNote(cur)}
-document.addEventListener('change',e=>{const K=MRA[cur];if(!K||!e.target||e.target.id!==K.sel)return;setTimeout(()=>{try{if(cur==='mva'){const a=mraSlot('acc');if(a.type=='g'){const nm=e.target.value;if(nm){const n=$('#mraN'),L=mraL('acc').filter(r=>r.data&&((r.n===nm)||(r.data.list||[]).some(z=>z&&z.n===nm&&z.c===a.pc)));if(n)n.innerHTML=L.length?`<p class="mran">ℹ️ للتلميذ(ة) ${esc(nm)} ${L.length} ${L.length==1?'بطاقة محفوظة':'بطاقات محفوظة'} في السجل.</p>`:''}return}}mraNote(cur)}catch(x){}},0)});
+document.addEventListener('change',e=>{const K=MRA[cur];if(!K||!e.target||e.target.id!==K.sel)return;setTimeout(()=>{try{if(cur==='mva'){const a=mraSlot('acc');if(a.type=='g'){const nm=e.target.value;if(nm){const n=$('#mraN'),L=mraL('acc').filter(r=>r.data&&((r.n===nm)||(r.data.list||[]).some(z=>z&&z.n===nm&&z.c===a.pc)));if(n)n.innerHTML=L.length?`<p class="mran">ℹ️ للتلميذ(ة) ${esc(nm)} ${nW(L.length,'بطاقة')} محفوظة في السجل.</p>`:''}return}}mraNote(cur)}catch(x){}},0)});
 mraMig();
 {const _gm=go;go=function(){_gm.apply(this,arguments);try{mraInject()}catch(e){}}}
 /* ===== سجل المقابلات: «تسجيل لقاء المتابعة» للمقابلات التي فيها موعد متابعة فقط ===== */
@@ -3536,7 +3537,7 @@ function mvStuSum(n,c){if(!n)return [];const T=r=>r.data||{},me=r=>r.n===n&&r.c=
  return [['بطاقة إنصات',mraL('ins').filter(me).length],['مواكبة فردية',acc.filter(r=>T(r).type!='g'&&me(r)).length],['مواكبة جماعية',acc.filter(inG).length],['تشخيص (شاملة)',dx.filter(r=>T(r).kind!=='m'&&me(r)).length],['تشخيص (متفوق)',dx.filter(r=>T(r).kind==='m'&&me(r)).length],['متكرر الغياب',mraL('ab').filter(me).length],['مقابلة',MVX().itv.filter(me).length],['مخالفة',dsL().filter(r=>(r.ss||[]).some(z=>z&&z.n===n&&z.c===c)).length]].filter(x=>x[1])}
 function mraNote2(k){const K=MRA[k],sl=mraSlot(K.s),n=$('#mraN');if(!n)return;
  if(K.cls){const L=mraL(K.s).filter(r=>r.id!==sl._rid&&String(r.c)==sl.c);if(!sl.c||!L.length){n.innerHTML='';return}L.sort((a,b)=>String(b.d).localeCompare(String(a.d)));
-  n.innerHTML=`<p class="mran">ℹ️ لهذا القسم ${L.length} ${L.length==1?'بطاقة محفوظة':'بطاقات محفوظة'} في السجل، آخرها بتاريخ ${esc(mraFD(L[0].d))}. <button class="btn s xb" id="mraNS">عرضها في السجل</button></p>`;
+  n.innerHTML=`<p class="mran">ℹ️ لهذا القسم ${nW(L.length,'بطاقة')} محفوظة في السجل، آخرها بتاريخ ${esc(mraFD(L[0].d))}. <button class="btn s xb" id="mraNS">عرضها في السجل</button></p>`;
   $('#mraNS').onclick=()=>{MRF[k]={lv:'',c:'',q:sl.c};go();const p=$('#mraP');if(p)try{p.scrollIntoView({block:'start'})}catch(e){}};return}
  if(k==='mva'&&sl.type==='g'){n.innerHTML='';return}
  const c=sl.c||sl.pc||'',nm_=sl.n,sm=mvStuSum(nm_,c);if(!nm_||!sm.length){n.innerHTML='';return}
