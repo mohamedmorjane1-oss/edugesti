@@ -3669,8 +3669,8 @@ window.fitBs=fitBs;fitBs();addEventListener('load',fitBs);addEventListener('resi
 <script>
 /* ===== EduGesti تجريبي: تعويض الرموز التعبيرية بأيقونات خطية في الواجهة فقط (لا يمس الأوراق المطبوعة) ===== */
 (function(){
- const MAP={'🖨':'print','⬇':'dl','⬆':'up','➕':'plus','📂':'folder','💾':'save','📞':'phone','✖':'x','🗓':'cal','🗑':'trash','🔄':'refresh','✎':'pen','✏':'pen','💬':'chat','🔎':'search','⚙':'adj','↺':'restore','⇄':'swap','⇅':'sort','↪':'fwd','📅':'cal','📋':'clip','🏫':'bld','🎨':'palette','☀':'sun','☾':'moon','📦':'box','📷':'camera','👪':'users','📁':'folder','💡':'bulb','👥':'users','🗂':'folder','✔':'check','⚠':'alert'};
- const RE=new RegExp('('+Object.keys(MAP).join('|')+')\\uFE0F? ?','g'),T=/[🖨⬇⬆➕📂💾📞✖🗓🗑🔄✎✏💬🔎⚙↺⇄⇅↪📅📋🏫🎨☀☾📦📷👪📁💡👥🗂✔⚠]/u;
+ const MAP={'🖨':'print','⬇':'dl','⬆':'up','➕':'plus','📂':'folder','💾':'save','📞':'phone','✖':'x','🗓':'cal','🗑':'trash','🔄':'refresh','✎':'pen','✏':'pen','💬':'chat','🔎':'search','⚙':'adj','↺':'restore','⇄':'swap','⇅':'sort','↪':'fwd','📅':'cal','📋':'clip','🏫':'bld','🎨':'palette','☀':'sun','☾':'moon','📦':'box','📷':'camera','👪':'users','📁':'folder','💡':'bulb','👥':'users','🗂':'folder','✔':'check','⚠':'alert','↩':'restore'};
+ const RE=new RegExp('('+Object.keys(MAP).join('|')+')\\uFE0F? ?','g'),T=/[🖨⬇⬆➕📂💾📞✖🗓🗑🔄✎✏💬🔎⚙↺⇄⇅↪↩📅📋🏫🎨☀☾📦📷👪📁💡👥🗂✔⚠]/u;
  const SKIP='.pg,.paper,select,option,textarea,script,style,svg,[contenteditable]';
  function iconize(root){
   if(!root)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>T.test(n.nodeValue)&&!(n.parentElement&&n.parentElement.closest(SKIP))?1:2});
@@ -3711,9 +3711,9 @@ main details:not(.sx):not(.mlr)>summary::before{content:'';display:inline-block;
 main details:not(.sx):not(.mlr)[open]>summary::before{transform:rotate(-90deg)}
 main details.clsd>summary::before{order:-1}
 /* أيقونة البحث داخل الحقل */
-html main input[type=search],html.lgt main input[type=search]{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237a9195' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M20 20l-4.6-4.6'/%3E%3C/svg%3E")!important;background-repeat:no-repeat!important;background-size:18px 18px!important;background-position:left 12px center!important;padding-left:38px!important}
+html main input[type=search],html.lgt main input[type=search]{-webkit-appearance:none!important;appearance:none!important;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237a9195' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M20 20l-4.6-4.6'/%3E%3C/svg%3E")!important;background-repeat:no-repeat!important;background-size:18px 18px!important;background-position:left 12px center!important;padding-left:38px!important}
 /* خانات الاختيار بلون التطبيق */
-main input[type=checkbox],body input[type=checkbox]{accent-color:#0e7c86}
+main input[type=checkbox],body input[type=checkbox]{accent-color:#0e7c86}main input[type=search]::-webkit-search-decoration{-webkit-appearance:none}
 /* عنوان بأيقونة */
 main .h3i{display:flex;align-items:center;gap:6px}main .h3i .eic{width:17px;height:17px;margin:0;color:var(--gold)}html.lgt main .h3i .eic{color:#0e5c66}
 /* بطاقات الإحصاء بأيقونة في دائرة */
